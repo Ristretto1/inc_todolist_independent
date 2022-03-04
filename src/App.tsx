@@ -15,7 +15,7 @@ function App() {
     let tasks2: Array<TasksType> = [
         {id: 1, title: "Terminator", isDone: true},
         {id: 2, title: "XXX", isDone: false},
-        {id: 3, title: "YYY", isDone: false},
+
     ]
 
     return (

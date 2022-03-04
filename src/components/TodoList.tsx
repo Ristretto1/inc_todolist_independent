@@ -3,7 +3,7 @@ import TodoListTitle from "./TodoListTitle";
 import TasksList from "./TasksList";
 import Button from "./Button";
 
- export type TasksType = {
+export type TasksType = {
     id: number,
     title: string,
     isDone: boolean
@@ -23,13 +23,12 @@ const TodoList = (props: TodoListPropsType) => {
                 <button>+</button>
             </div>
 
-            <TasksList tasks = {props.tasks}/>
+            <TasksList tasks={props.tasks}/>
 
             <div>
-                <Button title = {'All'}/>
-                <Button title = {'Active'}/>
-                <Button title = {'Completed'}/>
-=
+                <Button title={'All'}/>
+                <Button title={'Active'}/>
+                <Button title={'Completed'}/>
             </div>
         </div>
     );
