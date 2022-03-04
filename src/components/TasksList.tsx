@@ -2,15 +2,20 @@ import React from 'react';
 import {TasksType} from "./TodoList";
 
 type TasksListPropsType = {
-    tasks: Array<TasksType>
+    tasks: Array<TasksType>,
+    removeTask: (value: number)=>void
 }
 
 const TasksList = (props: TasksListPropsType) => {
     return (
         <ul>
-            {props.tasks.map((t) => {
+            {props.tasks.map((t, index) => {
                 return (
-                    <li><input type="checkbox" checked={t.isDone}/> <span>{t.title}</span></li>
+                    <li key ={index}>
+                        <input type="checkbox" checked={t.isDone}/>
+                        <span>{t.title}</span>
+                        <button onClick={()=>props.removeTask(t.id) }>x</button>
+                    </li>
                 )
             })}
             {/*<li><input type="checkbox" checked={props.tasks[0].isDone}/> <span>{props.tasks[0].title}</span></li>*/}

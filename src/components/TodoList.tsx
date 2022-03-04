@@ -11,7 +11,8 @@ export type TasksType = {
 
 type TodoListPropsType = {
     title: string,
-    tasks: Array<TasksType>
+    tasks: Array<TasksType>,
+    removeTask: (value: number)=>void
 }
 
 const TodoList = (props: TodoListPropsType) => {
@@ -23,7 +24,7 @@ const TodoList = (props: TodoListPropsType) => {
                 <button>+</button>
             </div>
 
-            <TasksList tasks={props.tasks}/>
+            <TasksList tasks={props.tasks} removeTask={props.removeTask}/>
 
             <div>
                 <Button title={'All'}/>
