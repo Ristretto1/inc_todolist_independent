@@ -15,9 +15,9 @@ function App() {
         {id: 3, title: "React", isDone: false},
     ];
 
-    let [tasks, setTasks] = useState(InitTasks);
+    let [tasks, setTasks] = useState<Array<TasksType>>(InitTasks);
     let [filter, setFilter] = useState<FilterType>('All');
-    
+
     if (filter === 'Active') tasks = tasks.filter((t)=> t.isDone === false);
     if (filter === 'Completed') tasks = tasks.filter((t)=> t.isDone === true);
 
