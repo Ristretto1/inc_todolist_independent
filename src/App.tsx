@@ -20,16 +20,20 @@ function App() {
         {id: v1(), title: "JS", isDone: true},
         {id: v1(), title: "React", isDone: false},
     ];
-    {/* отслеживаем данные */}
+    {/* отслеживаем данные */
+    }
     let [tasks, setTasks] = useState<Array<TasksType>>(InitTasks);
-    {/* отслеживаем изменение виртуального фильтра */}
+    {/* отслеживаем изменение виртуального фильтра */
+    }
     let [filter, setFilter] = useState<FilterType>('All');
 
-    {/* Условия изменения виртуального фильтра */}
-    if (filter === 'Active') tasks = tasks.filter((t)=> t.isDone === false);
-    if (filter === 'Completed') tasks = tasks.filter((t)=> t.isDone === true);
+    {/* Условия изменения виртуального фильтра */
+    }
+    if (filter === 'Active') tasks = tasks.filter((t) => t.isDone === false);
+    if (filter === 'Completed') tasks = tasks.filter((t) => t.isDone === true);
 
-    {/* Функция для кнопки, для изменения значения виртуального фильтра */}
+    {/* Функция для кнопки, для изменения значения виртуального фильтра */
+    }
     const filteredTask = (title: FilterType) => {
         setFilter(title)
     }
@@ -39,7 +43,7 @@ function App() {
         setTasks(filteredTasks)
     }
 
-        const addTask = (title: string) => {
+    const addTask = (title: string) => {
         let newTask = {id: v1(), title: title, isDone: false}
         setTasks([newTask, ...tasks])
     }
