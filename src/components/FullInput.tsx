@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useState} from 'react';
-import Button from "./Button";
+import Button from './Button';
 
 type FullInputPropsType = {
     addTask: (title: string) => void

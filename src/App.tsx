@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
-import TodoList from "./components/TodoList";
-import {v1} from "uuid";
+import TodoList from './components/TodoList';
+import {v1} from 'uuid';
 
 export type FilterType = 'All' | 'Active' | 'Completed'
 export type TasksType = {
@@ -16,9 +16,9 @@ function App() {
     const todoListTitle_1: string = 'What to learn';
 
     let InitTasks: Array<TasksType> = [
-        {id: v1(), title: "CSS", isDone: true},
-        {id: v1(), title: "JS", isDone: true},
-        {id: v1(), title: "React", isDone: false},
+        {id: v1(), title: 'CSS', isDone: true},
+        {id: v1(), title: 'JS', isDone: true},
+        {id: v1(), title: 'React', isDone: false},
     ];
     {/* отслеживаем данные */
     }
