@@ -15,6 +15,11 @@ type TodoListPropsType = {
 }
 
 const TodoList: React.FC<TodoListPropsType> = (props) => {
+
+const changedFilterHandler = (FilterValues: FilterValueType) => {
+    props.changeFilter(FilterValues)
+    }
+
     return (
         <div>
             <div>
@@ -28,9 +33,9 @@ const TodoList: React.FC<TodoListPropsType> = (props) => {
                 />
 
                 <div>
-                    <button className={props.filter === 'all' ? 'activeFilter': ''} onClick={() => props.changeFilter('all')}>All</button>
-                    <button className={props.filter === 'active' ? 'activeFilter': ''} onClick={() => props.changeFilter('active')}>Active</button>
-                    <button className={props.filter === 'completed' ? 'activeFilter': ''} onClick={() => props.changeFilter('completed')}>Completed</button>
+                    <button className={props.filter === 'all' ? 'activeFilter': ''} onClick={() => changedFilterHandler('all')}>All</button>
+                    <button className={props.filter === 'active' ? 'activeFilter': ''} onClick={() => changedFilterHandler('active')}>Active</button>
+                    <button className={props.filter === 'completed' ? 'activeFilter': ''} onClick={() => changedFilterHandler('completed')}>Completed</button>
                 </div>
             </div>
         </div>
