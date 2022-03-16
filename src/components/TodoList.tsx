@@ -1,7 +1,6 @@
 import React from 'react';
 import {FilterValueType, TaskType} from '../App';
 import TodoListHeader from './TodoListHeader';
-import Button from './Button';
 import TasksList from './TasksList';
 import InputBlock from './InputBlock';
 
@@ -28,9 +27,9 @@ const TodoList: React.FC<TodoListPropsType> = (props) => {
                 />
 
                 <div>
-                    <Button name={'All'} callBack={() => props.changeFilter('all')}/>
-                    <Button name={'Active'} callBack={() => props.changeFilter('active')}/>
-                    <Button name={'Completed'} callBack={() => props.changeFilter('completed')}/>
+                    <button className={'activeFilter'} onClick={() => props.changeFilter('all')}>All</button>
+                    <button onClick={() => props.changeFilter('active')}>Active</button>
+                    <button onClick={() => props.changeFilter('completed')}>Completed</button>
                 </div>
             </div>
         </div>
