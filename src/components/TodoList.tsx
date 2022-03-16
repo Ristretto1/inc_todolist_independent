@@ -1,40 +1,35 @@
 import React from 'react';
-import TodoListTitle from './TodoListTitle';
-import TasksList from './TasksList';
+import {FilterValueType, TaskType} from '../App';
+import TodoListHeader from './TodoListHeader';
 import Button from './Button';
-import {FilterType, TasksType} from '../App';
-import FullInput from './FullInput';
+import TasksList from './TasksList';
+import InputBlock from './InputBlock';
 
 type TodoListPropsType = {
     title: string,
-    tasks: Array<TasksType>,
-    removeTask: (value: string) => void
-    filteredTask: (value: FilterType) => void
-    addTask: (value: string) => void
+    tasks: Array<TaskType>,
+    removeTask: (id: string) => void
+    changeFilter: (filter: FilterValueType) => void
+    addTask: (id: string) => void
 }
 
-const TodoList = (props: TodoListPropsType) => {
-
-    // Блок с функциями для кнопок фильтрации
-    const onClickAllHandler = () => props.filteredTask('All')
-    const onClickActiveHandler = () => props.filteredTask('Active')
-    const onClickCompletedHandler = () => props.filteredTask('Completed')
-
-
+const TodoList: React.FC<TodoListPropsType> = (props) => {
     return (
         <div>
-            <TodoListTitle title={props.title}/>
+            <div>
+                <TodoListHeader title={props.title}/>
+                <InputBlock addTask={props.addTask}/>
 
-            {/* Блок инпут + кнопка */}
-            <FullInput addTask={props.addTask}/>
+                <TasksList
+                    tasks={props.tasks}
+                    removeTask={props.removeTask}
+                />
 
-            {/* Блок со списком задач */}
-            <TasksList tasks={props.tasks} removeTask={props.removeTask}/>
-
-            <div> {/* Блок с кнопками фильтрации */}
-                <Button name={'All'} callback={onClickAllHandler}/>
-                <Button name={'Active'} callback={onClickActiveHandler}/>
-                <Button name={'Completed'} callback={onClickCompletedHandler}/>
+                <div>
+                    <Button name={'All'} callBack={() => props.changeFilter('all')}/>
+                    <Button name={'Active'} callBack={() => props.changeFilter('active')}/>
+                    <Button name={'Completed'} callBack={() => props.changeFilter('completed')}/>
+                </div>
             </div>
         </div>
     );
