@@ -11,7 +11,10 @@ const InputBlock: React.FC<FullInputPropsType> = (props) => {
     const [title, setTitle] = useState('')
 
     const onAddTaskHandler = () => {
-        props.addTask(title)
+        if (title.trim() === '') {
+            return
+        }
+        props.addTask(title.trim())
         setTitle('')
     }
 
