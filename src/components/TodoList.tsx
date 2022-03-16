@@ -11,6 +11,7 @@ type TodoListPropsType = {
     changeFilter: (filter: FilterValueType) => void
     addTask: (id: string) => void
     changeTaskStatus: (taskId: string, isDone: boolean) => void
+    filter: FilterValueType
 }
 
 const TodoList: React.FC<TodoListPropsType> = (props) => {
@@ -27,9 +28,9 @@ const TodoList: React.FC<TodoListPropsType> = (props) => {
                 />
 
                 <div>
-                    <button className={'activeFilter'} onClick={() => props.changeFilter('all')}>All</button>
-                    <button onClick={() => props.changeFilter('active')}>Active</button>
-                    <button onClick={() => props.changeFilter('completed')}>Completed</button>
+                    <button className={props.filter === 'all' ? 'activeFilter': ''} onClick={() => props.changeFilter('all')}>All</button>
+                    <button className={props.filter === 'active' ? 'activeFilter': ''} onClick={() => props.changeFilter('active')}>Active</button>
+                    <button className={props.filter === 'completed' ? 'activeFilter': ''} onClick={() => props.changeFilter('completed')}>Completed</button>
                 </div>
             </div>
         </div>

@@ -20,7 +20,7 @@ const TasksList: React.FC<TasksListPropsType> = (props) => {
         }
 
         return (
-            <li key={t.id}>
+            <li key={t.id} className={t.isDone ? 'isDone' : ''}>
                 <input type="checkbox"
                        onChange={onChangeCheckboxHandler}
                        checked={t.isDone}

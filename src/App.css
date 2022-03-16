@@ -15,6 +15,10 @@
   color: red;
 }
 
-.active-filter {
+.activeFilter {
   background-color: aquamarine;
+}
+
+.isDone {
+  opacity: 0.5;
 }
