@@ -1,63 +1,59 @@
 import React, {useState} from 'react';
 import './App.css';
-import {Todolist} from './Todolist';
+import TodoList from './components/TodoList';
 import {v1} from 'uuid';
 
-export type FilterValuesType = 'all' | 'active' | 'completed';
+export type FilterType = 'all' | 'active' | 'completed'
+
+export type TaskType = {
+    id: string,
+    task: string,
+    isDone: boolean
+}
 
 function App() {
+    const [filter, setFilter] = useState<FilterType>('all')
+    const [tasks, setTasks] = useState<Array<TaskType>>([
+        {id: v1(), task: 'q1', isDone: false},
+        {id: v1(), task: 'q1', isDone: true},
+        {id: v1(), task: 'q1', isDone: true},
+        {id: v1(), task: 'q1', isDone: false},
+        {id: v1(), task: 'q1', isDone: true},
+    ])
 
-    let [tasks, setTasks] = useState([
-        {id: v1(), title: 'HTML&CSS', isDone: true},
-        {id: v1(), title: 'JS', isDone: true},
-        {id: v1(), title: 'ReactJS', isDone: false},
-        {id: v1(), title: 'Rest API', isDone: false},
-        {id: v1(), title: 'GraphQL', isDone: false},
-    ]);
-
-
-    // Удаление и добавление таски
-    function removeTask(id: string) {
-        let filteredTasks = tasks.filter(t => t.id != id);
-        setTasks(filteredTasks);
-    }
-    function addTask(title: string) {
-        let task = {id: v1(), title: title, isDone: false};
-        let newTasks = [task, ...tasks];
-        setTasks(newTasks);
+    let filteredTask = tasks
+    if (filter === 'active') filteredTask = tasks.filter(t => !t.isDone)
+    if (filter === 'completed') filteredTask = tasks.filter(t => t.isDone)
+    const filterSwitcher = (filter: FilterType) => {
+        setFilter(filter)
     }
 
+    const removeTask = (id: string) => {
+        setTasks(tasks.filter(t => t.id !== id))
+    }
 
-    // Смена статуса чекбокса
-    const changeStatus = (taskId: string, isDone: boolean) => {
-        let task = tasks.find(t => t.id === taskId)
+    const addTask = (title: string) => {
+        const newTask = {id: v1(), task: title, isDone: false}
+        setTasks([newTask, ...tasks])
+    }
+
+    const checkboxStatusSwitcher = (id: string, isDone: boolean) => {
+        let task = tasks.find(t => t.id === id)
         if (task) task.isDone = isDone
-        let copy = [...tasks]
+        const copy = [...tasks]
         setTasks(copy)
     }
 
-
-    // Блок по фильтрации
-    let [filter, setFilter] = useState<FilterValuesType>('all');
-    let tasksForTodolist = tasks;
-    if (filter === 'active') tasksForTodolist = tasks.filter(t => !t.isDone);
-    if (filter === 'completed') tasksForTodolist = tasks.filter(t => t.isDone);
-    function changeFilter(value: FilterValuesType) {
-        setFilter(value);
-    }
-
-
     return (
         <div className="App">
-            <Todolist title="What to learn"
-                      tasks={tasksForTodolist}
-                      removeTask={removeTask}
-                      changeFilter={changeFilter}
-                      addTask={addTask}
-                      filter={filter}
-                      changeStatus={changeStatus}
+            <TodoList
+                tasks={filteredTask}
+                filterSwitcher={filterSwitcher}
+                removeTask={removeTask}
+                addTask={addTask}
+                checkboxStatusSwitcher={checkboxStatusSwitcher}
+                filter = {filter}
             />
-
         </div>
     );
 }

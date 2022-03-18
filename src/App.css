@@ -7,18 +7,19 @@
   margin-right: 50px;
 }
 
-.error {
-  border: red 1px solid;
-}
-
-.errorMessage {
+.errorText {
   color: red;
+  font-weight: bold;
 }
 
-.activeFilter {
-  background-color: aquamarine;
+.errorInput {
+  border: red 2px solid;
 }
 
-.isDone {
+.filterBtnActive {
+  background-color: gold;
+}
+
+.isDoneTask {
   opacity: 0.5;
 }
