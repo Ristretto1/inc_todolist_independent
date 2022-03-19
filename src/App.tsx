@@ -1,31 +1,39 @@
 import React, {useState} from 'react';
 import './App.css';
-import TodoList from './components/TodoList';
+import {Button} from './components/Button';
 import {v1} from 'uuid';
-
-export type FilterType = 'all' | 'active' | 'completed'
+import {TasksList} from './components/TasksList';
+import {Input} from './components/Input';
+import InputBlock from './components/InputBlock';
+import {TodoList} from './components/TodoList';
 
 export type TaskType = {
     id: string,
     task: string,
     isDone: boolean
 }
+export type FilterType = 'all' | 'active' | 'completed'
 
 function App() {
-    const [filter, setFilter] = useState<FilterType>('all')
     const [tasks, setTasks] = useState<Array<TaskType>>([
-        {id: v1(), task: 'q1', isDone: false},
-        {id: v1(), task: 'q1', isDone: true},
-        {id: v1(), task: 'q1', isDone: true},
-        {id: v1(), task: 'q1', isDone: false},
-        {id: v1(), task: 'q1', isDone: true},
+        {id: v1(), task: 'o1o', isDone: false},
+        {id: v1(), task: 'o2o', isDone: true},
+        {id: v1(), task: 'o3o', isDone: false},
+        {id: v1(), task: 'o4o', isDone: true},
+        {id: v1(), task: 'o5o', isDone: true},
     ])
+    const [title, setTitle] = useState<string>('')
+    const [filter, setFilter] = useState<FilterType>('all')
 
-    let filteredTask = tasks
-    if (filter === 'active') filteredTask = tasks.filter(t => !t.isDone)
-    if (filter === 'completed') filteredTask = tasks.filter(t => t.isDone)
-    const filterSwitcher = (filter: FilterType) => {
-        setFilter(filter)
+
+    const CheckBoxSwitcher = (id: string, isDone: boolean) => {
+        let task = tasks.find(t => t.id === id)
+        if (task) {
+            task.isDone = isDone
+            const copy = [...tasks]
+            setTasks(copy)
+        }
+
     }
 
     const removeTask = (id: string) => {
@@ -37,22 +45,21 @@ function App() {
         setTasks([newTask, ...tasks])
     }
 
-    const checkboxStatusSwitcher = (id: string, isDone: boolean) => {
-        let task = tasks.find(t => t.id === id)
-        if (task) task.isDone = isDone
-        const copy = [...tasks]
-        setTasks(copy)
-    }
+    let filteredTasks = tasks
+    if (filter === 'active') filteredTasks = tasks.filter(t => !t.isDone)
+    if (filter === 'completed') filteredTasks = tasks.filter(t => t.isDone)
 
     return (
         <div className="App">
             <TodoList
-                tasks={filteredTask}
-                filterSwitcher={filterSwitcher}
-                removeTask={removeTask}
+                title={title}
+                tasks={filteredTasks}
+                setTitle={setTitle}
                 addTask={addTask}
-                checkboxStatusSwitcher={checkboxStatusSwitcher}
-                filter = {filter}
+                removeTask={removeTask}
+                setFilter={setFilter}
+                CheckBoxSwitcher={CheckBoxSwitcher}
+                filter={filter}
             />
         </div>
     );

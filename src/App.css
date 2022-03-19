@@ -1,25 +1,26 @@
 .App {
-  padding: 30px;
-  display: flex;
+    padding: 30px;
+    display: flex;
 }
 
 .App > div {
-  margin-right: 50px;
+    margin-right: 50px;
+}
+
+.taskDone {
+    opacity: 0.5;
+}
+
+.errorBorder {
+    border: 2px solid red;
+    outline: none;
 }
 
 .errorText {
-  color: red;
-  font-weight: bold;
+    color: red;
+    font-weight: bold;
 }
 
-.errorInput {
-  border: red 2px solid;
-}
-
-.filterBtnActive {
-  background-color: gold;
-}
-
-.isDoneTask {
-  opacity: 0.5;
+.activeFilterButton {
+    background-color: gold;
 }

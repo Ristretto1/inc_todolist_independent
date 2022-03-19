@@ -1,30 +1,35 @@
-import React, {ChangeEvent, useState, KeyboardEvent} from 'react';
+import React, {ChangeEvent, KeyboardEvent} from 'react';
 
 type InputPropsType = {
     title: string
     setTitle: (title: string) => void
     callback: () => void
-    setError?: (error: string) => void
     className?: string
+    setError?: (error: string) => void
 }
 
-export const Input:React.FC<InputPropsType> = (props) => {
+export const Input: React.FC<InputPropsType> = ({title, setTitle, callback, setError, className}) => {
 
     const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        props.setTitle(e.currentTarget.value)
+        setTitle(e.currentTarget.value)
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if(props.setError) props.setError('')
-        if (e.key === 'Enter') props.callback()
+        if (setError) {
+            setError('')
+        }
+        if (e.key === 'Enter') {
+            callback()
+        }
     }
 
     return (
         <input
-            value={props.title}
+            type="text"
+            value={title}
             onChange={onChangeInputHandler}
             onKeyPress={onKeyPressHandler}
-            className={props.className}
+            className={className}
         />
     );
 };
