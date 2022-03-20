@@ -5,31 +5,31 @@ import {TaskType} from '../App';
 type TasksListPropsType = {
     tasks: Array<TaskType>
     removeTask: (id: string) => void
-    CheckBoxSwitcher: (id: string, isDone: boolean) => void
+    switchCheckbox: (id: string, isChecked: boolean) => void
 }
 
-export const TasksList: React.FC<TasksListPropsType> = ({tasks, removeTask, CheckBoxSwitcher}) => {
+export const TasksList: React.FC<TasksListPropsType> = ({tasks, removeTask, switchCheckbox}) => {
 
-    const onClickRemoveTask = (id: string) => {
+    const onRemoveTaskHandler = (id: string) => {
         removeTask(id)
     }
 
-    const onChangeCheckBoxSwitcher = (id: string, e: ChangeEvent<HTMLInputElement>) => {
-        CheckBoxSwitcher(id, e.currentTarget.checked)
+    const onSwitchCheckboxHandler = (id: string, e: ChangeEvent<HTMLInputElement>) => {
+        switchCheckbox(id, e.currentTarget.checked)
     }
 
     return (
         <ul>
             {tasks.map(t => {
                 return (
-                    <li key={t.id} className={t.isDone ? 'taskDone' : ''}>
+                    <li key={t.id} className={t.isDone ? 'checkedTask' : ''}>
                         <input
                             type="checkbox"
                             checked={t.isDone}
-                            onChange={(e) => onChangeCheckBoxSwitcher(t.id, e)}
+                            onChange={(e) => onSwitchCheckboxHandler(t.id, e)}
                         />
                         <span>{t.task}</span>
-                        <Button name={'x'} callback={() => onClickRemoveTask(t.id)}/>
+                        <Button name={'x'} callback={() => onRemoveTaskHandler(t.id)}/>
                     </li>
                 )
             })}

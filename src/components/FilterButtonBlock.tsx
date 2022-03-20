@@ -3,32 +3,33 @@ import {Button} from './Button';
 import {FilterType} from '../App';
 
 type FilterButtonBlockPropsType = {
-    setFilter: (filter: FilterType) => void
     filter: FilterType
+    setFilter: (filter: FilterType) => void
 }
 
-export const FilterButtonBlock: React.FC<FilterButtonBlockPropsType> = ({setFilter, filter}) => {
+export const FilterButtonBlock: React.FC<FilterButtonBlockPropsType> = ({filter, setFilter}) => {
 
-    const onClickSwitchFilter = (filter: FilterType) => {
+    const onSwitchFilterHandler = (filter: FilterType) => {
         setFilter(filter)
     }
 
     return (
         <div>
             <Button
-                className={filter === 'all' ? 'activeFilterButton' : ''}
                 name={'All'}
-                callback={() => onClickSwitchFilter('all')}
+                callback={() => onSwitchFilterHandler('all')}
+                className={filter === 'all' ? 'activeFilter' : ''}
             />
             <Button
-                className={filter === 'active' ? 'activeFilterButton' : ''}
                 name={'Active'}
-                callback={() => onClickSwitchFilter('active')}
+                callback={() => onSwitchFilterHandler('active')}
+                className={filter === 'active' ? 'activeFilter' : ''}
             />
             <Button
-                className={filter === 'completed' ? 'activeFilterButton' : ''}
                 name={'Completed'}
-                callback={() => onClickSwitchFilter('completed')}/>
+                callback={() => onSwitchFilterHandler('completed')}
+                className={filter === 'completed' ? 'activeFilter' : ''}
+            />
         </div>
     );
 };
