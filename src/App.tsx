@@ -4,6 +4,7 @@ import {Button} from './components/Button';
 import {v1} from 'uuid';
 import {TasksList} from './components/TasksList';
 import {FilterBtnBlock} from './components/FilterBtnBlock';
+import {InputBlock} from './components/InputBlock';
 
 export type TaskType = {
     id: string
@@ -31,7 +32,7 @@ function App() {
     if (filter === 'completed') filteredTasks = tasks.filter(t => t.isDone)
     if (filter === 'active') filteredTasks = tasks.filter(t => !t.isDone)
 
-    const checkboxSwitcher = (id:string, isDone:boolean) => {
+    const checkboxSwitcher = (id: string, isDone: boolean) => {
         const task = tasks.find(t => t.id === id)
         if (task) task.isDone = isDone
         const copy = [...tasks]
@@ -43,11 +44,7 @@ function App() {
             <div>
                 <h3>What to learn</h3>
 
-                <div>
-                    <input/>
-                    <Button name={'+'} callback={() => {
-                    }}/>
-                </div>
+                <InputBlock/>
 
                 <TasksList tasks={filteredTasks} removeTask={removeTask} checkboxSwitcher={checkboxSwitcher}/>
                 <FilterBtnBlock setFilter={setFilter}/>
