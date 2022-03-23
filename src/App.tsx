@@ -19,6 +19,10 @@ function App() {
         {id: v1(), task: '4', isDone: true},
     ])
 
+    const removeTask = (id: string) => {
+        setTasks(tasks.filter(t => t.id !== id))
+    }
+
     return (
         <div className="App">
             <div>
@@ -30,7 +34,7 @@ function App() {
                     }}/>
                 </div>
 
-                <TasksList tasks={tasks}/>
+                <TasksList tasks={tasks} removeTask={removeTask}/>
 
                 <div>
                     <Button name={'All'} callback={() => {
