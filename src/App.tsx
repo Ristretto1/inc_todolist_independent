@@ -3,12 +3,15 @@ import './App.css';
 import {Button} from './components/Button';
 import {v1} from 'uuid';
 import {TasksList} from './components/TasksList';
+import {FilterBtnBlock} from './components/FilterBtnBlock';
 
 export type TaskType = {
     id: string
     task: string
     isDone: boolean
 }
+
+export type FilterType = 'all' | 'active' | 'completed'
 
 function App() {
 
@@ -23,6 +26,11 @@ function App() {
         setTasks(tasks.filter(t => t.id !== id))
     }
 
+    const [filter, setFilter] = useState<FilterType>('all')
+    let filteredTasks = tasks
+    if (filter === 'completed') filteredTasks = tasks.filter(t => t.isDone)
+    if (filter === 'active') filteredTasks = tasks.filter(t => !t.isDone)
+
     return (
         <div className="App">
             <div>
@@ -34,16 +42,8 @@ function App() {
                     }}/>
                 </div>
 
-                <TasksList tasks={tasks} removeTask={removeTask}/>
-
-                <div>
-                    <Button name={'All'} callback={() => {
-                    }}/>
-                    <Button name={'Active'} callback={() => {
-                    }}/>
-                    <Button name={'Completed'} callback={() => {
-                    }}/>
-                </div>
+                <TasksList tasks={filteredTasks} removeTask={removeTask}/>
+                <FilterBtnBlock setFilter={setFilter}/>
             </div>
         </div>
     );
