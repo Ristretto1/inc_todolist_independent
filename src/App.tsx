@@ -31,6 +31,13 @@ function App() {
     if (filter === 'completed') filteredTasks = tasks.filter(t => t.isDone)
     if (filter === 'active') filteredTasks = tasks.filter(t => !t.isDone)
 
+    const checkboxSwitcher = (id:string, isDone:boolean) => {
+        const task = tasks.find(t => t.id === id)
+        if (task) task.isDone = isDone
+        const copy = [...tasks]
+        setTasks(copy)
+    }
+
     return (
         <div className="App">
             <div>
@@ -42,7 +49,7 @@ function App() {
                     }}/>
                 </div>
 
-                <TasksList tasks={filteredTasks} removeTask={removeTask}/>
+                <TasksList tasks={filteredTasks} removeTask={removeTask} checkboxSwitcher={checkboxSwitcher}/>
                 <FilterBtnBlock setFilter={setFilter}/>
             </div>
         </div>
