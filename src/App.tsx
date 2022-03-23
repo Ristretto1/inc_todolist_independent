@@ -50,9 +50,8 @@ function App() {
                 <h3>What to learn</h3>
 
                 <InputBlock addTask={addTask}/>
-
                 <TasksList tasks={filteredTasks} removeTask={removeTask} checkboxSwitcher={checkboxSwitcher}/>
-                <FilterBtnBlock setFilter={setFilter}/>
+                <FilterBtnBlock setFilter={setFilter} filter={filter}/>
             </div>
         </div>
     );
