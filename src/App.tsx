@@ -39,12 +39,17 @@ function App() {
         setTasks(copy)
     }
 
+    const addTask = (title: string) => {
+        const newTask = {id: v1(), task: title, isDone: false}
+        setTasks([newTask, ...tasks])
+    }
+
     return (
         <div className="App">
             <div>
                 <h3>What to learn</h3>
 
-                <InputBlock/>
+                <InputBlock addTask={addTask}/>
 
                 <TasksList tasks={filteredTasks} removeTask={removeTask} checkboxSwitcher={checkboxSwitcher}/>
                 <FilterBtnBlock setFilter={setFilter}/>
