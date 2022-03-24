@@ -42,6 +42,7 @@ function App() {
                 removeTask={removeTask}
                 checkboxSwitch={checkboxSwitch}
                 setFilter={setFilter}
+                filter={filter}
             />
         </div>
     );

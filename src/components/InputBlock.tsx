@@ -21,11 +21,11 @@ export const InputBlock: React.FC<InputBlockPropsType> = ({addTask}) => {
 
     return (
         <div>
-            <Input title={title} setTitle={setTitle} callback={onAddTaskHandler} setError={setError}/>
+            <Input className={error ? 'errorBorder' : ''} title={title} setTitle={setTitle} callback={onAddTaskHandler} setError={setError}/>
 
             <Button name={'+'} callback={onAddTaskHandler}/>
 
-            {error && <div>{error}</div>}
+            {error && <div className={'errorText'}>{error}</div>}
         </div>
     );
 };

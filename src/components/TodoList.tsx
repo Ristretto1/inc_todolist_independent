@@ -11,9 +11,10 @@ type TodoListPropsType = {
     checkboxSwitch: (id: string, done: boolean) => void
     addTask: (title: string) => void
     setFilter: (filter: FilterType) => void
+    filter: FilterType
 }
 
-export const TodoList: React.FC<TodoListPropsType> = ({setFilter, addTask, tasks, removeTask, checkboxSwitch}) => {
+export const TodoList: React.FC<TodoListPropsType> = ({filter, setFilter, addTask, tasks, removeTask, checkboxSwitch}) => {
     return (
         <div>
             <h3>What to learn</h3>
@@ -22,7 +23,7 @@ export const TodoList: React.FC<TodoListPropsType> = ({setFilter, addTask, tasks
 
             <TasksList tasks={tasks} removeTask={removeTask} checkboxSwitch={checkboxSwitch}/>
 
-            <FilterBtnBlock setFilter={setFilter}/>
+            <FilterBtnBlock setFilter={setFilter} filter={filter}/>
         </div>
     );
 };

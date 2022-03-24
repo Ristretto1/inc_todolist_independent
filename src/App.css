@@ -6,3 +6,21 @@
 .App > div {
   margin-right: 50px;
 }
+
+.taskIsDone {
+  opacity: 0.5;
+}
+
+.errorBorder {
+  border: 2px solid red;
+  outline: none;
+}
+
+.errorText {
+  color: red;
+  font-weight: bold;
+}
+
+.activeFilterButton {
+  background-color: gold;
+}
