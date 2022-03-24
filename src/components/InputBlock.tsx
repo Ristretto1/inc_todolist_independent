@@ -3,10 +3,11 @@ import {Button} from './Button';
 import {Input} from './Input';
 
 type InputBlockPropsType = {
-    addTask: (title: string) => void
+    addTask: (title: string, id:string) => void
+    TLid: string
 }
 
-export const InputBlock: React.FC<InputBlockPropsType> = ({addTask}) => {
+export const InputBlock: React.FC<InputBlockPropsType> = ({TLid,addTask}) => {
     const [title, setTitle] = useState<string>('')
     const [error, setError] = useState<string>('')
 
@@ -15,7 +16,7 @@ export const InputBlock: React.FC<InputBlockPropsType> = ({addTask}) => {
             setError('Поле обязательно для заполнения')
             return
         }
-        addTask(title.trim())
+        addTask(title.trim(), TLid)
         setTitle('')
     }
 

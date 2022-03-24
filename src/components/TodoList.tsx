@@ -7,23 +7,31 @@ import {FilterBtnBlock} from './FilterBtnBlock';
 
 type TodoListPropsType = {
     tasks: Array<TaskType>
-    removeTask: (id: string) => void
-    checkboxSwitch: (id: string, done: boolean) => void
-    addTask: (title: string) => void
-    setFilter: (filter: FilterType) => void
+    removeTask: (id: string, TLid: string) => void
+    checkboxSwitch: (id: string, done: boolean, TLid:string) => void
+    addTask: (title: string, id: string) => void
+    changeFilter: (filter: FilterType, id: string) => void
     filter: FilterType
+    title: string
+    TLid: string
+    removeTodolist: (TLid: string) => void
 }
 
-export const TodoList: React.FC<TodoListPropsType> = ({filter, setFilter, addTask, tasks, removeTask, checkboxSwitch}) => {
+export const TodoList: React.FC<TodoListPropsType> = ({removeTodolist, TLid,title, filter, changeFilter, addTask, tasks, removeTask, checkboxSwitch}) => {
+
+    const onRemoveTodolistHandler = () => {
+        removeTodolist(TLid)
+    }
+
     return (
         <div>
-            <h3>What to learn</h3>
+            <h3>{title} <button onClick={onRemoveTodolistHandler}>x</button></h3>
 
-            <InputBlock addTask={addTask}/>
+            <InputBlock TLid={TLid} addTask={addTask}/>
 
-            <TasksList tasks={tasks} removeTask={removeTask} checkboxSwitch={checkboxSwitch}/>
+            <TasksList TLid={TLid} tasks={tasks} removeTask={removeTask} checkboxSwitch={checkboxSwitch}/>
 
-            <FilterBtnBlock setFilter={setFilter} filter={filter}/>
+            <FilterBtnBlock TLid={TLid} changeFilter={changeFilter} filter={filter}/>
         </div>
     );
 };

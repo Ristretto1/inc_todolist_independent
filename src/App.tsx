@@ -12,38 +12,92 @@ export type TaskType = {
 }
 export type FilterType = 'all' | 'active' | 'completed'
 
+export type TodolistType = {
+    id: string
+    title: string
+    filter: FilterType
+}
+
 function App() {
-    const [filter, setFilter] = useState<FilterType>('all')
-    const [tasks, setTasks] = useState<Array<TaskType>>([
-        {id: v1(), task: '1', isDone: false},
-        {id: v1(), task: '2', isDone: false},
-        {id: v1(), task: '3', isDone: true},
-        {id: v1(), task: '4', isDone: true},
+    const removeTask = (id: string, todolistId: string) => {
+        const tasks = tasksOdj[todolistId]
+        const filteredTasks = tasks.filter(t => t.id !== id)
+        tasksOdj[todolistId] = filteredTasks
+        setTasks({...tasksOdj})
+    }
+    const checkboxSwitch = (id: string, done: boolean, todolistId: string) => {
+        const tasks = tasksOdj[todolistId]
+        const mappedTasks = tasks.map(t => t.id === id ? {...t, isDone: done} : t)
+        tasksOdj[todolistId] = mappedTasks
+        setTasks({...tasksOdj})
+    }
+    const addTask = (title: string, todolistId: string) => {
+        const tasks = tasksOdj[todolistId]
+        const task = {id: v1(), task: title, isDone: false}
+        const newTasks = [task, ...tasks]
+        tasksOdj[todolistId] = newTasks
+        setTasks({...tasksOdj})
+    }
+
+    const changeFilter = (filter: FilterType, todolistId: string) => {
+        const todolist = todolists.find(tl => tl.id === todolistId)
+        if (todolist) {
+            todolist.filter = filter
+            setTodolists([...todolists])
+        }
+    }
+
+    const removeTodolist = (TLId: string) => {
+        setTodolists(todolists.filter(tl => tl.id !== TLId))
+        delete tasksOdj[TLId]
+        setTasks({...tasksOdj})
+    }
+
+    const todolist1 = v1()
+    const todolist2 = v1()
+
+    const [todolists, setTodolists] = useState<Array<TodolistType>>([
+        {id: todolist1, title: 'What to learn', filter: 'all'},
+        {id: todolist2, title: 'What to buy', filter: 'all'},
     ])
 
-    const removeTask = (id: string) => setTasks(tasks.filter(t => t.id !== id))
-    const checkboxSwitch = (id: string, done: boolean) => {
-        setTasks(tasks.map(t => t.id === id ? {...t, isDone: done} : t))
-    }
-    const addTask = (title: string) => {
-        const newTask = {id: v1(), task: title, isDone: false}
-        setTasks([newTask, ...tasks])
-    }
-
-    let filteredTask = tasks
-    if (filter === 'completed') filteredTask = tasks.filter(t => t.isDone)
-    if (filter === 'active') filteredTask = tasks.filter(t => !t.isDone)
+    const [tasksOdj, setTasks] = useState({
+        [todolist1]: [
+            {id: v1(), task: '1', isDone: false},
+            {id: v1(), task: '2', isDone: false},
+            {id: v1(), task: '3', isDone: true},
+            {id: v1(), task: '4', isDone: true},
+        ],
+        [todolist2]: [
+            {id: v1(), task: '5', isDone: false},
+            {id: v1(), task: '6', isDone: true},
+            {id: v1(), task: '7', isDone: false},
+            {id: v1(), task: '8', isDone: true},
+        ],
+    })
 
     return (
         <div className="App">
-            <TodoList
-                addTask={addTask}
-                tasks={filteredTask}
-                removeTask={removeTask}
-                checkboxSwitch={checkboxSwitch}
-                setFilter={setFilter}
-                filter={filter}
-            />
+            {todolists.map(tl => {
+                let filteredTask = tasksOdj[tl.id]
+                if (tl.filter === 'completed') filteredTask = tasksOdj[tl.id].filter(t => t.isDone)
+                if (tl.filter === 'active') filteredTask = tasksOdj[tl.id].filter(t => !t.isDone)
+
+                return (
+                    <TodoList key={tl.id}
+                              TLid={tl.id}
+                              title={tl.title}
+                              addTask={addTask}
+                              tasks={filteredTask}
+                              removeTask={removeTask}
+                              checkboxSwitch={checkboxSwitch}
+                              changeFilter={changeFilter}
+                              filter={tl.filter}
+                              removeTodolist={removeTodolist}
+                    />
+                )
+            })}
+
         </div>
     );
 }

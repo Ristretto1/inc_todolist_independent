@@ -3,13 +3,14 @@ import {Button} from './Button';
 import {FilterType} from '../App';
 
 type FilterBtnBlockPropsType = {
-    setFilter: (filter: FilterType) => void
+    changeFilter: (filter: FilterType, id: string) => void
     filter: FilterType
+    TLid: string
 }
 
-export const FilterBtnBlock: React.FC<FilterBtnBlockPropsType> = ({filter, setFilter}) => {
+export const FilterBtnBlock: React.FC<FilterBtnBlockPropsType> = ({TLid, filter, changeFilter}) => {
 
-    const onFilterChangeHandler = (filter: FilterType) => setFilter(filter)
+    const onFilterChangeHandler = (filter: FilterType) => changeFilter(filter, TLid)
 
     return (
         <div>
