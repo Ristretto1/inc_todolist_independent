@@ -20,6 +20,9 @@ function App() {
     ])
 
     const removeTask = (id: string) => setTasks(tasks.filter(t => t.id !== id))
+    const CheckboxSwitch = (id: string, done: boolean) => {
+        setTasks(tasks.map(t => t.id === id ? {...t, isDone: done} : t))
+    }
 
     return (
         <div className="App">
@@ -31,7 +34,7 @@ function App() {
                     }}/>
                 </div>
 
-                <TasksList tasks={tasks} removeTask={removeTask}/>
+                <TasksList tasks={tasks} removeTask={removeTask} CheckboxSwitch={CheckboxSwitch}/>
 
                 <div>
                     <Button name={'All'} callback={() => {
