@@ -10,9 +10,10 @@ export type TaskType = {
     task: string
     isDone: boolean
 }
+export type FilterType = 'all' | 'active' | 'completed'
 
 function App() {
-
+    const [filter, setFilter] = useState<FilterType>('all')
     const [tasks, setTasks] = useState<Array<TaskType>>([
         {id: v1(), task: '1', isDone: false},
         {id: v1(), task: '2', isDone: false},
@@ -25,13 +26,23 @@ function App() {
         setTasks(tasks.map(t => t.id === id ? {...t, isDone: done} : t))
     }
     const addTask = (title: string) => {
-        const newTask =  {id: v1(), task: title, isDone: false}
+        const newTask = {id: v1(), task: title, isDone: false}
         setTasks([newTask, ...tasks])
     }
 
+    let filteredTask = tasks
+    if (filter === 'completed') filteredTask = tasks.filter(t => t.isDone)
+    if (filter === 'active') filteredTask = tasks.filter(t => !t.isDone)
+
     return (
         <div className="App">
-            <TodoList addTask={addTask} tasks={tasks} removeTask={removeTask} checkboxSwitch={checkboxSwitch}/>
+            <TodoList
+                addTask={addTask}
+                tasks={filteredTask}
+                removeTask={removeTask}
+                checkboxSwitch={checkboxSwitch}
+                setFilter={setFilter}
+            />
         </div>
     );
 }
