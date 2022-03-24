@@ -5,14 +5,14 @@ import {TaskType} from '../App';
 type TasksListPropsType ={
     tasks: Array<TaskType>
     removeTask: (id: string) => void
-    CheckboxSwitch: (id: string, done: boolean) => void
+    checkboxSwitch: (id: string, done: boolean) => void
 }
 
-export const TasksList:React.FC<TasksListPropsType> = ({tasks, removeTask, CheckboxSwitch}) => {
+export const TasksList:React.FC<TasksListPropsType> = ({tasks, removeTask, checkboxSwitch}) => {
 
     const onRemoveTaskHandler = (id: string) => removeTask(id)
     const onCheckboxSwitchHandler = (id: string, e: ChangeEvent<HTMLInputElement>) => {
-        CheckboxSwitch(id, e.currentTarget.checked)
+        checkboxSwitch(id, e.currentTarget.checked)
     }
 
     return (
