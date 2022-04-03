@@ -16,7 +16,7 @@ export const Input: React.FC<InputPropsType> = ({className, setError, keyPressCa
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         setError('')
-        if(e.key === 'Enter')keyPressCallback()
+        if (e.key === 'Enter') keyPressCallback()
     }
 
     return (

@@ -3,6 +3,12 @@ import './App.css';
 import {v1} from 'uuid';
 import {Todolist} from './components/Todolist';
 
+export type TDLType = {
+    id: string,
+    title: string,
+    filter: FilterType
+}
+
 export type TaskType = {
     id: string
     task: string
@@ -14,7 +20,8 @@ function App() {
     const todolistId1 = v1();
     const todolistId2 = v1();
 
-    const [todolists, setTodolists] = useState([
+
+    const [todolists, setTodolists] = useState<Array<TDLType>>([
         {id: todolistId1, title: 'Kava', filter: 'all'},
         {id: todolistId2, title: 'Banga', filter: 'all'},
     ])
@@ -71,6 +78,7 @@ function App() {
                         setFilter={setFilter}
                         todolistId={tdl.id}
                         removeTDL={removeTDL}
+                        filter={tdl.filter}
                     />
                 )
             })}

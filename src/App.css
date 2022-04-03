@@ -19,3 +19,7 @@
   border: 1px solid red;
   outline: none;
 }
+
+.activeFilter {
+  background: bisque;
+}

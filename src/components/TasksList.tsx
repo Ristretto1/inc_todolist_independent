@@ -11,7 +11,7 @@ type TasksListPropsType = {
 
 export const TasksList: React.FC<TasksListPropsType> = ({todolistId, checkboxSwitcher, removeTask, tasks}) => {
 
-    const removeTaskHandler = (taskId: string) => removeTask(todolistId,taskId)
+    const removeTaskHandler = (taskId: string) => removeTask(todolistId, taskId)
     const onCheckBoxHandler = (id: string, e: ChangeEvent<HTMLInputElement>) => {
         checkboxSwitcher(todolistId, id, e.currentTarget.checked)
     }
