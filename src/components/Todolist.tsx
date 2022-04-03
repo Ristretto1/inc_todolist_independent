@@ -13,16 +13,20 @@ type TodolistPropsType = {
     setFilter: (todolistId: string, filter: FilterType) => void
     title: string
     todolistId: string
+    removeTDL: (todolistId: string) => void
 }
 
-export const Todolist: React.FC<TodolistPropsType> = ({todolistId,title, removeTask, tasks, setFilter, addTask, checkboxSwitcher}) => {
+export const Todolist: React.FC<TodolistPropsType> = ({removeTDL, todolistId, title, removeTask, tasks, setFilter, addTask, checkboxSwitcher}) => {
+
+    const removeTDLHandler = () => removeTDL(todolistId)
+
+
     return (
         <div>
 
             <h3>
                 {title}
-                <Button name={'X'} callback={() => {
-                }}/>
+                <Button name={'X'} callback={removeTDLHandler}/>
             </h3>
 
             <InputBlock
