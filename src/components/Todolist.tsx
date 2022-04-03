@@ -7,8 +7,8 @@ import {FilterType, TaskType} from '../App';
 
 type TodolistPropsType = {
     removeTask: (todolistId: string, taskId: string) => void
-    addTask: (title: string) => void
-    checkboxSwitcher: (id: string, checkboxStatus: boolean) => void
+    addTask: (todolistId: string, title: string) => void
+    checkboxSwitcher: (todolistId: string, id: string, checkboxStatus: boolean) => void
     tasks: Array<TaskType>
     setFilter: (todolistId: string, filter: FilterType) => void
     title: string
@@ -27,6 +27,7 @@ export const Todolist: React.FC<TodolistPropsType> = ({todolistId,title, removeT
 
             <InputBlock
                 addTask={addTask}
+                todolistId={todolistId}
             />
 
             <TasksList

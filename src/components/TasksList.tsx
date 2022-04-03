@@ -5,7 +5,7 @@ import {TaskType} from '../App';
 type TasksListPropsType = {
     tasks: Array<TaskType>
     removeTask: (todolistId: string, taskId: string) => void
-    checkboxSwitcher: (id: string, checkboxStatus: boolean) => void
+    checkboxSwitcher: (todolistId: string, id: string, checkboxStatus: boolean) => void
     todolistId: string
 }
 
@@ -13,7 +13,7 @@ export const TasksList: React.FC<TasksListPropsType> = ({todolistId, checkboxSwi
 
     const removeTaskHandler = (taskId: string) => removeTask(todolistId,taskId)
     const onCheckBoxHandler = (id: string, e: ChangeEvent<HTMLInputElement>) => {
-        checkboxSwitcher(id, e.currentTarget.checked)
+        checkboxSwitcher(todolistId, id, e.currentTarget.checked)
     }
 
     return (
