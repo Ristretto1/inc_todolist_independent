@@ -4,15 +4,16 @@ import {TaskType} from '../App';
 
 type TasksListPropsType = {
     tasks: Array<TaskType>
-    removeTask: (taskId: string) => void
+    removeTask: (todolistId: string, taskId: string) => void
     checkboxSwitcher: (id: string, checkboxStatus: boolean) => void
+    todolistId: string
 }
 
-export const TasksList: React.FC<TasksListPropsType> = ({checkboxSwitcher, removeTask, tasks}) => {
+export const TasksList: React.FC<TasksListPropsType> = ({todolistId, checkboxSwitcher, removeTask, tasks}) => {
 
-    const removeTaskHandler = (taskId: string) => removeTask(taskId)
+    const removeTaskHandler = (taskId: string) => removeTask(todolistId,taskId)
     const onCheckBoxHandler = (id: string, e: ChangeEvent<HTMLInputElement>) => {
-        checkboxSwitcher (id, e.currentTarget.checked)
+        checkboxSwitcher(id, e.currentTarget.checked)
     }
 
     return (
@@ -23,7 +24,7 @@ export const TasksList: React.FC<TasksListPropsType> = ({checkboxSwitcher, remov
                         <input
                             type="checkbox"
                             checked={t.isDone}
-                            onChange={(e) =>onCheckBoxHandler(t.id, e)}
+                            onChange={(e) => onCheckBoxHandler(t.id, e)}
                         />
                         <span>{t.task}</span>
                         <Button name={'x'} callback={() => removeTaskHandler(t.id)}/>
