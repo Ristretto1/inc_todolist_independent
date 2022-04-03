@@ -44,7 +44,7 @@ function App() {
         setTasks({...tasks, [todolistId]: [newTask, ...tasks[todolistId]]})
     }
     const checkboxSwitcher = (todolistId: string, id: string, checkboxStatus: boolean) => {
-        // setTasks(tasks.map(t => t.id === id ? {...t, isDone: checkboxStatus} : t))
+        setTasks({...tasks, [todolistId]: tasks[todolistId].map(t => t.id === id ? {...t, isDone: checkboxStatus} : t)})
     }
     const setFilter = (todolistId: string, filter: FilterType) => {
         setTodolists(todolists.map(tdl => tdl.id === todolistId ? {...tdl, filter} : tdl))
