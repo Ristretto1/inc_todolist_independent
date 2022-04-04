@@ -6,20 +6,3 @@
 .App > div {
   margin-right: 50px;
 }
-
-.taskIsDone {
-  opacity: 0.5;
-}
-
-.errorText {
-  color: red;
-}
-
-.errorBorder {
-  border: 1px solid red;
-  outline: none;
-}
-
-.activeFilter {
-  background: bisque;
-}
