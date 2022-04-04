@@ -1,33 +1,32 @@
 import React, {ChangeEvent} from 'react';
-import {TaskType} from '../App';
 import {Button} from './Button';
+import {TaskType} from '../App';
 
 type TasksListPropsType = {
     tasks: Array<TaskType>
-    removeTask: (todolistId: string, taskId: string) => void
-    switchCheckboxStatus: (todolistId: string, status: boolean, taskId: string) => void
-    todolistId: string
+    removeTask: (taskId: string) => void
+    checkboxSwitcher: (checkboxStatus:boolean, taskId: string) => void
 }
 
-export const TasksList: React.FC<TasksListPropsType> = ({todolistId, switchCheckboxStatus, removeTask, tasks}) => {
+export const TasksList: React.FC<TasksListPropsType> = ({checkboxSwitcher,removeTask, tasks}) => {
+
+    const removeTaskHandler = (taskId: string) => removeTask(taskId)
+    const onChechboxHandler = (e: ChangeEvent<HTMLInputElement>, taskId: string) => {
+        checkboxSwitcher(e.currentTarget.checked, taskId)
+    }
+
     return (
         <ul>
             {tasks.map(t => {
-
-                const removeTaskHandler = (taskId: string) => removeTask(todolistId, taskId)
-                const onSwitchCheckboxStatusHandler = (e: ChangeEvent<HTMLInputElement>, taskId: string) => {
-                    switchCheckboxStatus(todolistId, e.currentTarget.checked, taskId)
-                }
-
                 return (
-                    <li key={t.id} className={t.isDone ? 'taskIsDone' : ''}>
+                    <li className={t.isDone ? 'taskIsDone' : ''} key={t.id}>
                         <input
                             type="checkbox"
                             checked={t.isDone}
-                            onChange={(e) => onSwitchCheckboxStatusHandler(e, t.id)}
+                            onChange={(e) => onChechboxHandler(e, t.id)}
                         />
                         <span>{t.task}</span>
-                        <Button name={'X'} callback={() => removeTaskHandler(t.id)}/>
+                        <Button name={'x'} callback={() => removeTaskHandler(t.id)}/>
                     </li>
                 )
             })}

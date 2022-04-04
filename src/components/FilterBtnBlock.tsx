@@ -2,31 +2,30 @@ import React from 'react';
 import {Button} from './Button';
 import {FilterType} from '../App';
 
-type FilterBtnBlockPropsType = {
-    setFilter: (todolistId: string, filter: FilterType) => void
+type FilterBtnBlock = {
+    setFilter: (filter: FilterType) => void
     filter: FilterType
-    todolistId: string
 }
 
-export const FilterBtnBlock: React.FC<FilterBtnBlockPropsType> = ({todolistId, filter,setFilter}) => {
+export const FilterBtnBlock: React.FC<FilterBtnBlock> = ({filter, setFilter}) => {
 
-    const onChangeFilterHandler = (filter: FilterType) => setFilter(todolistId, filter)
+    const FilterSwitcher = (filter: FilterType)=> setFilter(filter)
 
     return (
         <div>
             <Button
                 name={'All'}
-                callback={() => onChangeFilterHandler('all')}
+                callback={() => FilterSwitcher('all')}
                 className={filter === 'all' ? 'activeFilterBtn' : ''}
             />
             <Button
                 name={'Active'}
-                callback={() => onChangeFilterHandler('active')}
+                callback={() => FilterSwitcher('active')}
                 className={filter === 'active' ? 'activeFilterBtn' : ''}
             />
             <Button
                 name={'Completed'}
-                callback={() => onChangeFilterHandler('completed')}
+                callback={() => FilterSwitcher('completed')}
                 className={filter === 'completed' ? 'activeFilterBtn' : ''}
             />
         </div>

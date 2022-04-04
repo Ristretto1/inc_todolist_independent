@@ -1,34 +1,33 @@
 import React, {useState} from 'react';
-import {Input} from './Input';
 import {Button} from './Button';
+import {Input} from './Input';
 
 type InputBlockPropsType = {
-    addTask: (todolistId: string, title: string) => void
-    todolistId: string
+    addTask: (title: string) => void
 }
 
-export const InputBlock: React.FC<InputBlockPropsType> = ({todolistId, addTask}) => {
-    const [error, setError] = useState<string>('')
+export const InputBlock: React.FC<InputBlockPropsType> = ({addTask}) => {
+    const [error, setError] =useState<string>('')
     const [title, setTitle] = useState<string>('')
-    const onAddTaskHandler = () => {
-        if (!title.trim()) {
+    const addTaskHandler = () => {
+        if(!title.trim()) {
             setError('Поле обязательно')
             return
         }
-        addTask(todolistId, title.trim())
+        addTask(title.trim())
         setTitle('')
     }
 
     return (
         <div>
             <Input
-                setTitle={setTitle}
                 title={title}
-                callback={onAddTaskHandler}
+                setTitle={setTitle}
+                callback={addTaskHandler}
                 className={error ? 'errorBorder' : ''}
                 setError={setError}
             />
-            <Button name={'+'} callback={onAddTaskHandler}/>
+            <Button name={'+'} callback={addTaskHandler}/>
             {error && <div className={'errorText'}>{error}</div>}
         </div>
     );

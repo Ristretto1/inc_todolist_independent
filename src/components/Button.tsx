@@ -6,12 +6,12 @@ type ButtonPropsType = {
     className?: string
 }
 
-export const Button: React.FC<ButtonPropsType> = ({name, callback, className}) => {
+export const Button: React.FC<ButtonPropsType> = ({callback, className, name}) => {
 
     const onClickHandler = () => callback()
 
     return (
-        <button className={className} onClick={onClickHandler}>{name}</button>
+        <button onClick={onClickHandler} className={className}>{name}</button>
     );
 };
 
