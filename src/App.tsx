@@ -1,31 +1,36 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {InputBlock} from './components/InputBlock';
 import {Button} from './components/Button';
+import {v1} from 'uuid';
+import {Todolist} from './components/Todolist';
+
+export type TaskType = {
+    id: string
+    task: string
+    isDone: boolean
+}
+
+export type FilterType = 'all' | 'active' | 'completed'
 
 function App() {
 
-    
+    const [tasks, setTasks] = useState<Array<TaskType>>([
+        {id: v1(), task: '0101', isDone: false},
+        {id: v1(), task: '0202', isDone: false},
+        {id: v1(), task: '0303', isDone: true},
+        {id: v1(), task: '0404', isDone: true},
+        {id: v1(), task: '0505', isDone: true},
+    ])
+
+    let filteredTasks = tasks
 
     return (
         <div className="App">
-            <div>
-                <h3>
-                    What to learn
-                    <Button name={'X'} callback={()=>{}}/>
-                </h3>
-                <InputBlock/>
-                <ul>
-                    <li><input type="checkbox" checked={true}/> <span>HTML&CSS</span></li>
-                    <li><input type="checkbox" checked={true}/> <span>JS</span></li>
-                    <li><input type="checkbox" checked={false}/> <span>React</span></li>
-                </ul>
-                <div>
-                    <button>All</button>
-                    <button>Active</button>
-                    <button>Completed</button>
-                </div>
-            </div>
+            <Todolist
+                title={'yo'}
+                tasks={filteredTasks}
+            />
         </div>
     );
 }
