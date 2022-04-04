@@ -27,6 +27,13 @@ function App() {
     if (filter === 'completed') filteredTasks = tasks.filter(t => t.isDone)
     if (filter === 'active') filteredTasks = tasks.filter(t => !t.isDone)
 
+    const removeTask = (taskId: string) => {
+        setTasks(tasks.filter(t => t.id !== taskId))
+    }
+    const switchCheckboxStatus = (status: boolean, taskId: string) => {
+        setTasks(tasks.map(t => t.id === taskId ? {...t, isDone: status} : t))
+    }
+
     return (
         <div className="App">
             <Todolist
@@ -34,6 +41,8 @@ function App() {
                 tasks={filteredTasks}
                 setFilter={setFilter}
                 filter={filter}
+                removeTask={removeTask}
+                switchCheckboxStatus={switchCheckboxStatus}
             />
         </div>
     );
