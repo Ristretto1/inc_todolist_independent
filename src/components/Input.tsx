@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent,KeyboardEvent} from 'react';
 
 type InputPropsType ={
     title: string
@@ -12,6 +12,10 @@ export const Input: React.FC<InputPropsType> = ({className, title, setTitle, cal
     const onChangeHandler =(e:ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }
+    const onKeyPressHandler =(e:KeyboardEvent<HTMLInputElement>) => {
+        if(e.key === 'Enter') callback()
+    }
+    
 
     return (
         <input
@@ -19,6 +23,7 @@ export const Input: React.FC<InputPropsType> = ({className, title, setTitle, cal
             value={title}
             onChange={onChangeHandler}
             className={className}
+            onKeyPress={onKeyPressHandler}
         />
     );
 };
