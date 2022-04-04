@@ -3,10 +3,11 @@ import {Input} from './Input';
 import {Button} from './Button';
 
 type InputBlockPropsType = {
-    addTask: (title: string) => void
+    addTask: (todolistId: string, title: string) => void
+    todolistId: string
 }
 
-export const InputBlock: React.FC<InputBlockPropsType> = ({addTask}) => {
+export const InputBlock: React.FC<InputBlockPropsType> = ({todolistId, addTask}) => {
     const [error, setError] = useState<string>('')
     const [title, setTitle] = useState<string>('')
     const onAddTaskHandler = () => {
@@ -14,7 +15,7 @@ export const InputBlock: React.FC<InputBlockPropsType> = ({addTask}) => {
             setError('Поле обязательно')
             return
         }
-        addTask(title.trim())
+        addTask(todolistId, title.trim())
         setTitle('')
     }
 

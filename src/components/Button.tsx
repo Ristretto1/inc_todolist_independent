@@ -1,6 +1,6 @@
 import React from 'react';
 
-type ButtonPropsType ={
+type ButtonPropsType = {
     name: string
     callback: () => void
     className?: string
