@@ -10,3 +10,6 @@
 .taskIsDone {
   opacity: 0.5;
 }
+.activeFilterBtn {
+  background: bisque;
+}
