@@ -4,16 +4,17 @@ import {Button} from './Button';
 
 type TasksListPropsType = {
     tasks: Array<TaskType>
-    removeTask: (taskId: string) => void
+    removeTask: (todolistId: string, taskId: string) => void
     switchCheckboxStatus: (status: boolean, taskId: string) => void
+    todolistId: string
 }
 
-export const TasksList: React.FC<TasksListPropsType> = ({switchCheckboxStatus, removeTask, tasks}) => {
+export const TasksList: React.FC<TasksListPropsType> = ({todolistId, switchCheckboxStatus, removeTask, tasks}) => {
     return (
         <ul>
             {tasks.map(t => {
 
-                const removeTaskHandler = (taskId: string) => removeTask(taskId)
+                const removeTaskHandler = (taskId: string) => removeTask(todolistId,taskId)
                 const onSwitchCheckboxStatusHandler = (e: ChangeEvent<HTMLInputElement>, taskId: string) => {
                     switchCheckboxStatus(e.currentTarget.checked, taskId)
                 }

@@ -47,7 +47,8 @@ function App() {
     })
 
 
-    const removeTask = (taskId: string) => {
+    const removeTask = (todolistId: string, taskId: string) => {
+        setTasks({...tasks, [todolistId]: tasks[todolistId].filter(t => t.id !== taskId)})
         // setTasks(tasks.filter(t => t.id !== taskId))
     }
     const switchCheckboxStatus = (status: boolean, taskId: string) => {

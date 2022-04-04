@@ -10,7 +10,7 @@ type TodolistPropsType = {
     tasks: Array<TaskType>
     setFilter: (todolistId: string, filter: FilterType) => void
     filter: FilterType
-    removeTask: (taskId: string) => void
+    removeTask: (todolistId: string, taskId: string) => void
     switchCheckboxStatus: (status: boolean, taskId: string) => void
     addTask: (title: string) => void
     todolistId: string
@@ -31,6 +31,7 @@ export const Todolist: React.FC<TodolistPropsType> = ({todolistId, addTask, swit
                 tasks={tasks}
                 removeTask={removeTask}
                 switchCheckboxStatus={switchCheckboxStatus}
+                todolistId={todolistId}
             />
             <FilterBtnBlock
                 setFilter={setFilter}
