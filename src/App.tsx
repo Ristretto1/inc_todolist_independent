@@ -1,15 +1,20 @@
 import React from 'react';
 import './App.css';
+import {InputBlock} from './components/InputBlock';
+import {Button} from './components/Button';
 
 function App() {
+
+    
+
     return (
         <div className="App">
             <div>
-                <h3>What to learn</h3>
-                <div>
-                    <input/>
-                    <button>+</button>
-                </div>
+                <h3>
+                    What to learn
+                    <Button name={'X'} callback={()=>{}}/>
+                </h3>
+                <InputBlock/>
                 <ul>
                     <li><input type="checkbox" checked={true}/> <span>HTML&CSS</span></li>
                     <li><input type="checkbox" checked={true}/> <span>JS</span></li>
