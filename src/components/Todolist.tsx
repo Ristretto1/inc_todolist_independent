@@ -11,7 +11,7 @@ type TodolistPropsType = {
     setFilter: (todolistId: string, filter: FilterType) => void
     filter: FilterType
     removeTask: (todolistId: string, taskId: string) => void
-    switchCheckboxStatus: (status: boolean, taskId: string) => void
+    switchCheckboxStatus: (todolistId: string, status: boolean, taskId: string) => void
     addTask: (todolistId: string, title: string) => void
     todolistId: string
 }

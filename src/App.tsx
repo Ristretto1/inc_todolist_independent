@@ -51,7 +51,8 @@ function App() {
         setTasks({...tasks, [todolistId]: tasks[todolistId].filter(t => t.id !== taskId)})
         // setTasks(tasks.filter(t => t.id !== taskId))
     }
-    const switchCheckboxStatus = (status: boolean, taskId: string) => {
+    const switchCheckboxStatus = (todolistId: string, status: boolean, taskId: string) => {
+        setTasks({...tasks, [todolistId]: tasks[todolistId].map(t => t.id === taskId ? {...t, isDone: status} : t)})
         // setTasks(tasks.map(t => t.id === taskId ? {...t, isDone: status} : t))
     }
 
