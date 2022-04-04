@@ -1,15 +1,25 @@
 .App {
-  padding: 30px;
-  display: flex;
+    padding: 30px;
+    display: flex;
 }
 
 .App > div {
-  margin-right: 50px;
+    margin-right: 50px;
 }
 
 .taskIsDone {
-  opacity: 0.5;
+    opacity: 0.5;
 }
+
 .activeFilterBtn {
-  background: bisque;
+    background: bisque;
+}
+
+.errorText {
+    color: red;
+}
+
+.errorBorder {
+    border-color: red;
+    outline: none;
 }
