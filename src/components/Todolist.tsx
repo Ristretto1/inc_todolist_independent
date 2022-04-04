@@ -2,14 +2,17 @@ import React from 'react';
 import {Button} from './Button';
 import {InputBlock} from './InputBlock';
 import {TasksList} from './TasksList';
-import {TaskType} from '../App';
+import {FilterType, TaskType} from '../App';
+import {FilterBtnBlock} from './FilterBtnBlock';
 
 type TodolistPropsType = {
     title: string
     tasks: Array<TaskType>
+    setFilter: (filter: FilterType) => void
+    filter: FilterType
 }
 
-export const Todolist: React.FC<TodolistPropsType> = ({tasks, title,}) => {
+export const Todolist: React.FC<TodolistPropsType> = ({filter, setFilter, tasks, title,}) => {
     return (
         <div>
             <h3>
@@ -21,11 +24,10 @@ export const Todolist: React.FC<TodolistPropsType> = ({tasks, title,}) => {
             <TasksList
                 tasks={tasks}
             />
-            <div>
-                <button>All</button>
-                <button>Active</button>
-                <button>Completed</button>
-            </div>
+            <FilterBtnBlock
+                setFilter={setFilter}
+                filter={filter}
+            />
         </div>
     );
 };
