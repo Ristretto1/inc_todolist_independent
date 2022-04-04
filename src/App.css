@@ -6,3 +6,7 @@
 .App > div {
   margin-right: 50px;
 }
+
+.taskIsDone {
+  opacity: 0.5;
+}

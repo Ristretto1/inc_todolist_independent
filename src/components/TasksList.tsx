@@ -11,7 +11,7 @@ export const TasksList: React.FC<TasksListPropsType> = ({tasks}) => {
         <ul>
             {tasks.map(t => {
                 return (
-                    <li key={t.id}>
+                    <li key={t.id} className={t.isDone ? 'taskIsDone' : ''}>
                         <input
                             type="checkbox"
                             checked={t.isDone}
