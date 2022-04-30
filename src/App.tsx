@@ -23,6 +23,10 @@ function App() {
     const removeTask = (id: string) => {
         setTasks(tasks.filter(t => t.id !== id))
     }
+    const addTask = (title: string) => {
+        let newTask = {id: v1(), title: title, isDone: false}
+        setTasks([newTask, ...tasks])
+    }
 
 
     return (
@@ -30,6 +34,7 @@ function App() {
             <Todolist
                 tasks={tasks}
                 removeTask={removeTask}
+                addTask={addTask}
             />
         </div>
     );

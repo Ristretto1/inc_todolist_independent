@@ -8,9 +8,10 @@ import {TaskType} from "../App";
 type TodolistPropsType = {
     tasks: Array<TaskType>
     removeTask: (id: string) => void
+    addTask: (title: string) => void
 }
 
-export const Todolist: React.FC<TodolistPropsType> = ({tasks, removeTask}) => {
+export const Todolist: React.FC<TodolistPropsType> = ({tasks, removeTask, addTask}) => {
     return (
         <div>
             <h3>
@@ -18,7 +19,9 @@ export const Todolist: React.FC<TodolistPropsType> = ({tasks, removeTask}) => {
                 <Button name={'X'} callback={() => {
                 }}/>
             </h3>
-            <FullInput/>
+            <FullInput
+                callback={addTask}
+            />
             <TasksList
                 tasks={tasks}
                 removeTask={removeTask}
