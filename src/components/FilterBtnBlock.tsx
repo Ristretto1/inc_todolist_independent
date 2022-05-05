@@ -1,15 +1,18 @@
 import React from 'react';
 import {Button} from "./Button";
+import {FilterType} from "../App";
 
-export const FilterBtnBlock = () => {
+type FilterBtnBlockPropsType = {
+    changeFilter: (value: FilterType) => void
+}
+
+export const FilterBtnBlock: React.FC<FilterBtnBlockPropsType> = ({changeFilter}) => {
+
     return (
         <div>
-            <Button name={'All'} callback={() => {
-            }}/>
-            <Button name={'Active'} callback={() => {
-            }}/>
-            <Button name={'Completed'} callback={() => {
-            }}/>
+            <Button name={'All'} callback={() => changeFilter('all')}/>
+            <Button name={'Active'} callback={() => changeFilter('active')}/>
+            <Button name={'Completed'} callback={() => changeFilter('completed')}/>
         </div>
     );
 };

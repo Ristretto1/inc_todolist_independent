@@ -3,15 +3,16 @@ import {FullInput} from "./FullInput";
 import {FilterBtnBlock} from "./FilterBtnBlock";
 import {TasksList} from "./TasksList";
 import {Button} from "./Button";
-import {TaskType} from "../App";
+import {FilterType, TaskType} from "../App";
 
 type TodolistPropsType = {
     tasks: Array<TaskType>
     removeTask: (id: string) => void
     addTask: (title: string) => void
+    changeFilter: (value: FilterType) => void
 }
 
-export const Todolist: React.FC<TodolistPropsType> = ({tasks, removeTask, addTask}) => {
+export const Todolist: React.FC<TodolistPropsType> = ({tasks, removeTask, addTask, changeFilter}) => {
     return (
         <div>
             <h3>
@@ -26,7 +27,9 @@ export const Todolist: React.FC<TodolistPropsType> = ({tasks, removeTask, addTas
                 tasks={tasks}
                 removeTask={removeTask}
             />
-            <FilterBtnBlock/>
+            <FilterBtnBlock
+                changeFilter={changeFilter}
+            />
         </div>
     );
 };
