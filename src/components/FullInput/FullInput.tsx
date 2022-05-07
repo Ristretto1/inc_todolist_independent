@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {Button} from "./Button";
-import {Input} from "./Input";
+import {Button} from '../Button';
+import {Input} from '../Input';
+import s from './FullInput.module.css'
 
 type FullInputPropsType = {
     callback: (title: string) => void
@@ -26,9 +27,14 @@ export const FullInput: React.FC<FullInputPropsType> = ({callback}) => {
                 setTitle={setTitle}
                 onAddItemHandler={onAddItemHandler}
                 setError={setError}
+                className={error ? s.errorBorder : ''}
             />
-            <Button name={'+'} callback={onAddItemHandler}/>
-            {error && <div>{error}</div>}
+            <Button
+                name={'+'}
+                callback={onAddItemHandler}
+                disabled={!!error}
+            />
+            {error && <div className={s.errorText}>{error}</div>}
         </div>
     );
 };

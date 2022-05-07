@@ -5,9 +5,10 @@ type InputPropsType = {
     setTitle: (title: string) => void
     onAddItemHandler: () => void
     setError: (error: string) => void
+    className?: string
 }
 
-export const Input: React.FC<InputPropsType> = ({title, setTitle, onAddItemHandler, setError}) => {
+export const Input: React.FC<InputPropsType> = ({title, setTitle, onAddItemHandler, setError, className}) => {
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
@@ -26,6 +27,7 @@ export const Input: React.FC<InputPropsType> = ({title, setTitle, onAddItemHandl
             value={title}
             onChange={onChangeHandler}
             onKeyPress={onKeyPressHandler}
+            className={className}
         />
     );
 };

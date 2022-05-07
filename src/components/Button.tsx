@@ -4,16 +4,17 @@ type ButtonPropsType = {
     name: string,
     callback: ()=>void,
     className?: string
+    disabled?: boolean
 }
 
-export const Button: React.FC<ButtonPropsType> = ({name, callback, className}) => {
+export const Button: React.FC<ButtonPropsType> = ({name, callback, className, disabled}) => {
 
     const onButtonHandler = () => {
         callback()
     }
 
     return (
-        <button onClick={onButtonHandler} className={className}>{name}</button>
+        <button disabled={disabled} onClick={onButtonHandler} className={className}>{name}</button>
     );
 };
 
