@@ -4,13 +4,14 @@ type InputPropsType = {
     title: string
     setTitle: (title: string) => void
     callback: () => void
+    setError: (error: string) => void
 }
 
-export const Input: React.FC<InputPropsType> = ({title, setTitle, callback}) => {
+export const Input: React.FC<InputPropsType> = ({title, setTitle, callback, setError}) => {
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        //setError('')
+        setError('')
         if (e.key === 'Enter') {
             callback()
         }

@@ -9,9 +9,11 @@ type InputBlockPropsType = {
 export const InputBlock: React.FC<InputBlockPropsType> = ({callback}) => {
 
     const [title, setTitle] = useState<string>('')
+    const [error, setError] = useState<string>('')
+
     const addItemHandler = () => {
         if (title.trim() === '') {
-            //code
+            setError('Заполните поле')
         } else {
             callback(title.trim())
             setTitle('')
@@ -20,8 +22,9 @@ export const InputBlock: React.FC<InputBlockPropsType> = ({callback}) => {
 
     return (
         <div>
-            <Input title={title} setTitle={setTitle} callback={addItemHandler}/>
+            <Input title={title} setTitle={setTitle} callback={addItemHandler} setError={setError}/>
             <Button name={'+'} callback={addItemHandler}/>
+            {error && <div>{error}</div>}
         </div>
     );
 };
