@@ -2,7 +2,7 @@ import React from 'react';
 import {TdlTitleBlock} from './TdlTitleBlock';
 import {InputBlock} from './InputBlock';
 import {TasksList} from './TasksList';
-import {FilterBtnBlock} from './FilterBtnBlock';
+import {FilterBtnBlock} from './FilterBtnBlock/FilterBtnBlock';
 import {FilterType, TaskType} from '../App';
 
 type TodolistPropsType = {
@@ -11,9 +11,10 @@ type TodolistPropsType = {
     removeTask: (id: string) => void
     addTask: (title: string) => void
     checkboxStatusSwitcher: (id: string, status: boolean) => void
+    filter: FilterType
 }
 
-export const Todolist: React.FC<TodolistPropsType> = ({tasks, filterSwitcher, removeTask, addTask, checkboxStatusSwitcher}) => {
+export const Todolist: React.FC<TodolistPropsType> = ({tasks, filterSwitcher, removeTask, addTask, checkboxStatusSwitcher, filter}) => {
     return (
         <div>
             <TdlTitleBlock/>
@@ -27,6 +28,7 @@ export const Todolist: React.FC<TodolistPropsType> = ({tasks, filterSwitcher, re
             />
             <FilterBtnBlock
                 filterSwitcher={filterSwitcher}
+                filter={filter}
             />
         </div>
     );

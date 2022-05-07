@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
 import {Button} from './components/Button';
-import {FilterBtnBlock} from './components/FilterBtnBlock';
+import {FilterBtnBlock} from './components/FilterBtnBlock/FilterBtnBlock';
 import {TasksList} from './components/TasksList';
 import {InputBlock} from './components/InputBlock';
 import {TdlTitleBlock} from './components/TdlTitleBlock';
@@ -53,6 +53,7 @@ function App() {
                 removeTask={removeTask}
                 addTask={addTask}
                 checkboxStatusSwitcher={checkboxStatusSwitcher}
+                filter={filter}
             />
         </div>
     );
