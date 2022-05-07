@@ -14,6 +14,8 @@ export type TaskType = {
     isDone: boolean
 }
 
+export type FilterType = 'all' | 'active' | 'completed'
+
 function App() {
 
     const [tasks, setTasks] = useState<Array<TaskType>>([
@@ -25,10 +27,17 @@ function App() {
         {id: v1(), task: '5', isDone: false},
     ])
 
+    const [filter, setFilter] = useState<FilterType>('all')
+    let filteredTasks = tasks
+    if (filter === 'completed') filteredTasks = tasks.filter(t => t.isDone)
+    if (filter === 'active') filteredTasks = tasks.filter(t => !t.isDone)
+    const filterSwitcher = (value: FilterType) => setFilter(value)
+
     return (
         <div className="App">
             <Todolist
-                tasks={tasks}
+                tasks={filteredTasks}
+                filterSwitcher={filterSwitcher}
             />
         </div>
     );

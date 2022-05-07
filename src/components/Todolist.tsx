@@ -3,13 +3,14 @@ import {TdlTitleBlock} from './TdlTitleBlock';
 import {InputBlock} from './InputBlock';
 import {TasksList} from './TasksList';
 import {FilterBtnBlock} from './FilterBtnBlock';
-import {TaskType} from '../App';
+import {FilterType, TaskType} from '../App';
 
 type TodolistPropsType ={
     tasks: Array<TaskType>
+    filterSwitcher: (filter: FilterType) => void
 }
 
-export const Todolist: React.FC<TodolistPropsType> = ({tasks}) => {
+export const Todolist: React.FC<TodolistPropsType> = ({tasks, filterSwitcher}) => {
     return (
         <div>
             <TdlTitleBlock/>
@@ -17,7 +18,9 @@ export const Todolist: React.FC<TodolistPropsType> = ({tasks}) => {
             <TasksList
                 tasks={tasks}
             />
-            <FilterBtnBlock/>
+            <FilterBtnBlock
+                filterSwitcher={filterSwitcher}
+            />
         </div>
     );
 };
