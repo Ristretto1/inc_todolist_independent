@@ -4,13 +4,14 @@ import {FilterType} from '../../App';
 import s from './FilterBtnBlock.module.css'
 
 type FilterBtnBlockPropsType = {
-    filterSwitcher: (filter: FilterType) => void
+    filterSwitcher: (tdlId: string, filter: FilterType) => void
     filter: FilterType
+    tdlId: string
 }
 
-export const FilterBtnBlock: React.FC<FilterBtnBlockPropsType> = ({filterSwitcher, filter}) => {
+export const FilterBtnBlock: React.FC<FilterBtnBlockPropsType> = ({filterSwitcher, filter,tdlId}) => {
 
-    const onFilterBtnHandler = (filter: FilterType) => filterSwitcher(filter)
+    const onFilterBtnHandler = (filter: FilterType) => filterSwitcher(tdlId, filter)
 
     return (
         <div>

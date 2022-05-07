@@ -1,13 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
-import {Button} from './components/Button';
-import {FilterBtnBlock} from './components/FilterBtnBlock/FilterBtnBlock';
-import {TasksList} from './components/TasksList/TasksList';
-import {InputBlock} from './components/InputBlock/InputBlock';
-import {TdlTitleBlock} from './components/TdlTitleBlock';
 import {v1} from 'uuid';
 import {Todolist} from './components/Todolist';
-import set = Reflect.set;
 
 export type TaskType = {
     id: string,
@@ -16,6 +10,12 @@ export type TaskType = {
 }
 
 export type FilterType = 'all' | 'active' | 'completed'
+
+export type TodolistType = {
+    id: string
+    title: string
+    filter: FilterType
+}
 
 function App() {
 
@@ -28,11 +28,13 @@ function App() {
         {id: v1(), task: '5', isDone: false},
     ])
 
-    const [filter, setFilter] = useState<FilterType>('all')
-    let filteredTasks = tasks
-    if (filter === 'completed') filteredTasks = tasks.filter(t => t.isDone)
-    if (filter === 'active') filteredTasks = tasks.filter(t => !t.isDone)
-    const filterSwitcher = (value: FilterType) => setFilter(value)
+    const [todolists, setTodolists] = useState<Array<TodolistType>>([
+        {id: v1(), title: '1', filter: 'all'},
+        {id: v1(), title: '2', filter: 'all'},
+    ])
+
+
+    const filterSwitcher = (tdlId: string, value: FilterType) => setTodolists(todolists.map(tdl => tdl.id === tdlId ? {...tdl, filter: value} : tdl))
 
     const removeTask = (taskId: string) => setTasks(tasks.filter(t => t.id !== taskId))
 
@@ -47,14 +49,24 @@ function App() {
 
     return (
         <div className="App">
-            <Todolist
-                tasks={filteredTasks}
-                filterSwitcher={filterSwitcher}
-                removeTask={removeTask}
-                addTask={addTask}
-                checkboxStatusSwitcher={checkboxStatusSwitcher}
-                filter={filter}
-            />
+            {todolists.map(tdl => {
+                let filteredTasks = tasks
+                if (tdl.filter === 'completed') filteredTasks = tasks.filter(t => t.isDone)
+                if (tdl.filter === 'active') filteredTasks = tasks.filter(t => !t.isDone)
+                return (
+                    <Todolist
+                        key={tdl.id}
+                        tdlId={tdl.id}
+                        tasks={filteredTasks}
+                        filterSwitcher={filterSwitcher}
+                        removeTask={removeTask}
+                        addTask={addTask}
+                        checkboxStatusSwitcher={checkboxStatusSwitcher}
+                        filter={tdl.filter}
+                        tdlTitle={tdl.title}
+                    />
+                )
+            })}
         </div>
     );
 }
