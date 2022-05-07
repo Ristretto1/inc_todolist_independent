@@ -33,11 +33,14 @@ function App() {
     if (filter === 'active') filteredTasks = tasks.filter(t => !t.isDone)
     const filterSwitcher = (value: FilterType) => setFilter(value)
 
+    const removeTask = (taskId: string) => setTasks(tasks.filter(t => t.id !== taskId))
+
     return (
         <div className="App">
             <Todolist
                 tasks={filteredTasks}
                 filterSwitcher={filterSwitcher}
+                removeTask={removeTask}
             />
         </div>
     );
