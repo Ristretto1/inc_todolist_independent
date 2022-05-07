@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import {Button} from './components/Button';
 import {FilterBtnBlock} from './components/FilterBtnBlock/FilterBtnBlock';
-import {TasksList} from './components/TasksList';
+import {TasksList} from './components/TasksList/TasksList';
 import {InputBlock} from './components/InputBlock/InputBlock';
 import {TdlTitleBlock} from './components/TdlTitleBlock';
 import {v1} from 'uuid';

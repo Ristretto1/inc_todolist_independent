@@ -1,6 +1,7 @@
 import React, {ChangeEvent} from 'react';
-import {Button} from './Button';
-import {TaskType} from '../App';
+import {Button} from '../Button';
+import {TaskType} from '../../App';
+import s from './TasksList.module.css'
 
 type TasksListPropsType = {
     tasks: Array<TaskType>
@@ -19,7 +20,7 @@ export const TasksList: React.FC<TasksListPropsType> = ({tasks, removeTask,check
                 }
 
                 return (
-                    <li key={t.id}>
+                    <li key={t.id} className={t.isDone ? s.taskIsDone : ''}>
                         <input
                             type="checkbox"
                             checked={t.isDone}

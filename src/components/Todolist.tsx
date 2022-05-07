@@ -1,7 +1,7 @@
 import React from 'react';
 import {TdlTitleBlock} from './TdlTitleBlock';
 import {InputBlock} from './InputBlock/InputBlock';
-import {TasksList} from './TasksList';
+import {TasksList} from './TasksList/TasksList';
 import {FilterBtnBlock} from './FilterBtnBlock/FilterBtnBlock';
 import {FilterType, TaskType} from '../App';
 
