@@ -7,6 +7,7 @@ import {InputBlock} from './components/InputBlock';
 import {TdlTitleBlock} from './components/TdlTitleBlock';
 import {v1} from 'uuid';
 import {Todolist} from './components/Todolist';
+import set = Reflect.set;
 
 export type TaskType = {
     id: string,
@@ -35,12 +36,18 @@ function App() {
 
     const removeTask = (taskId: string) => setTasks(tasks.filter(t => t.id !== taskId))
 
+    const addTask = (title: string) => {
+        const newTask = {id: v1(), task: title, isDone: false}
+        setTasks([newTask, ...tasks])
+    }
+
     return (
         <div className="App">
             <Todolist
                 tasks={filteredTasks}
                 filterSwitcher={filterSwitcher}
                 removeTask={removeTask}
+                addTask={addTask}
             />
         </div>
     );

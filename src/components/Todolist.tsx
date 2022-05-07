@@ -9,13 +9,16 @@ type TodolistPropsType ={
     tasks: Array<TaskType>
     filterSwitcher: (filter: FilterType) => void
     removeTask: (id: string) => void
+    addTask: (title: string) => void
 }
 
-export const Todolist: React.FC<TodolistPropsType> = ({tasks, filterSwitcher, removeTask}) => {
+export const Todolist: React.FC<TodolistPropsType> = ({tasks, filterSwitcher, removeTask, addTask}) => {
     return (
         <div>
             <TdlTitleBlock/>
-            <InputBlock/>
+            <InputBlock
+                callback={addTask}
+            />
             <TasksList
                 tasks={tasks}
                 removeTask={removeTask}
