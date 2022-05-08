@@ -15,9 +15,10 @@ type TodolistPropsType = {
     tdlTitle: string
     tdlId: string
     removeTdl: (tdlId: string) => void
+    editTask: (tdlId: string, taskId: string, title: string) => void
 }
 
-export const Todolist: React.FC<TodolistPropsType> = ({tasks, filterSwitcher, removeTask, addTask, checkboxStatusSwitcher, filter, tdlTitle, tdlId, removeTdl}) => {
+export const Todolist: React.FC<TodolistPropsType> = ({tasks, filterSwitcher, removeTask, addTask, checkboxStatusSwitcher, filter, tdlTitle, tdlId, removeTdl, editTask}) => {
 
     const onAddTaskHandler = (title: string) => addTask(tdlId, title)
 
@@ -36,6 +37,7 @@ export const Todolist: React.FC<TodolistPropsType> = ({tasks, filterSwitcher, re
                 removeTask={removeTask}
                 checkboxStatusSwitcher={checkboxStatusSwitcher}
                 tdlId={tdlId}
+                editTask={editTask}
             />
             <FilterBtnBlock
                 filterSwitcher={filterSwitcher}

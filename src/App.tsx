@@ -75,6 +75,9 @@ function App() {
         setTodolists([newTdl, ...todolists])
         setTasks({...tasks, [newTdlId]: []})
     }
+    const editTask = (tdlId: string, taskId: string, title: string) => {
+        setTasks({...tasks, [tdlId]: tasks[taskId].map(t => t.id === taskId ? {...t, task: title} : t)})
+    }
 
     return (
         <div className="App">
@@ -96,6 +99,7 @@ function App() {
                         filter={tdl.filter}
                         tdlTitle={tdl.title}
                         removeTdl={removeTdl}
+                        editTask={editTask}
                     />
                 )
             })}
