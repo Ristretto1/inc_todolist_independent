@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import {v1} from 'uuid';
 import {Todolist} from './components/Todolist';
+import {InputBlock} from './components/InputBlock/InputBlock';
 
 export type TaskType = {
     id: string,
@@ -50,24 +51,35 @@ function App() {
             ...tdl, filter: value
         } : tdl))
     }
-
     const removeTask = (tdlId: string, taskId: string) => {
         setTasks({
             ...tasks, [tdlId]: tasks[tdlId].filter(t => t.id !== taskId)
         })
     }
-
     const addTask = (tdlId: string, title: string) => {
         const newTask = {id: v1(), task: title, isDone: false}
         setTasks({...tasks, [tdlId]: [newTask, ...tasks[tdlId]]})
     }
-
     const checkboxStatusSwitcher = (tdlId: string, id: string, status: boolean) => {
-        setTasks({...tasks, [tdlId]: tasks[tdlId].map(t=> t.id === id ? {...t, isDone: status} : t)})
+        setTasks({...tasks, [tdlId]: tasks[tdlId].map(t => t.id === id ? {...t, isDone: status} : t)})
+    }
+
+    const removeTdl = (tdlId: string) => {
+        setTodolists(todolists.filter(tdl => tdl.id !== tdlId))
+        delete tasks[tdlId]
+        setTasks({...tasks})
+    }
+    const addTdl = (title: string) => {
+        const newTdlId = v1()
+        const newTdl: TodolistType = {id: newTdlId, title: title, filter: 'all'}
+        setTodolists([newTdl, ...todolists])
+        setTasks({...tasks, [newTdlId]: []})
     }
 
     return (
         <div className="App">
+            <InputBlock callback={addTdl}/>
+
             {todolists.map(tdl => {
                 let filteredTasks = tasks[tdl.id]
                 if (tdl.filter === 'completed') filteredTasks = tasks[tdl.id].filter(t => t.isDone)
@@ -83,6 +95,7 @@ function App() {
                         checkboxStatusSwitcher={checkboxStatusSwitcher}
                         filter={tdl.filter}
                         tdlTitle={tdl.title}
+                        removeTdl={removeTdl}
                     />
                 )
             })}
