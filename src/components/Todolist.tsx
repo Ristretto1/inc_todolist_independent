@@ -8,27 +8,32 @@ import {FilterType, TaskType} from '../App';
 type TodolistPropsType = {
     tasks: Array<TaskType>
     filterSwitcher: (tdlId: string, filter: FilterType) => void
-    removeTask: (id: string) => void
-    addTask: (title: string) => void
+    removeTask: (tdlId: string, id: string) => void
+    addTask: (tdlId: string, title: string) => void
     checkboxStatusSwitcher: (id: string, status: boolean) => void
     filter: FilterType
     tdlTitle: string
     tdlId: string
 }
 
-export const Todolist: React.FC<TodolistPropsType> = ({tasks, filterSwitcher, removeTask, addTask, checkboxStatusSwitcher, filter,tdlTitle, tdlId}) => {
+export const Todolist: React.FC<TodolistPropsType> = ({tasks, filterSwitcher, removeTask, addTask, checkboxStatusSwitcher, filter, tdlTitle, tdlId}) => {
+
+    const onAddTaskHandler = (title: string) => addTask(tdlId, title)
+
+
     return (
         <div>
             <TdlTitleBlock
-            title={tdlTitle}
+                title={tdlTitle}
             />
             <InputBlock
-                callback={addTask}
+                callback={onAddTaskHandler}
             />
             <TasksList
                 tasks={tasks}
                 removeTask={removeTask}
                 checkboxStatusSwitcher={checkboxStatusSwitcher}
+                tdlId={tdlId}
             />
             <FilterBtnBlock
                 filterSwitcher={filterSwitcher}
