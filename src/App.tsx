@@ -60,11 +60,10 @@ function App() {
     const addTask = (tdlId: string, title: string) => {
         const newTask = {id: v1(), task: title, isDone: false}
         setTasks({...tasks, [tdlId]: [newTask, ...tasks[tdlId]]})
-        // setTasks([newTask, ...tasks])
     }
 
-    const checkboxStatusSwitcher = (id: string, status: boolean) => {
-        // setTasks(tasks.map(t => t.id === id ? {...t, isDone: status} : t))
+    const checkboxStatusSwitcher = (tdlId: string, id: string, status: boolean) => {
+        setTasks({...tasks, [tdlId]: tasks[tdlId].map(t=> t.id === id ? {...t, isDone: status} : t)})
     }
 
     return (
