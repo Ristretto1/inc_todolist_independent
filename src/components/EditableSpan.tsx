@@ -7,7 +7,7 @@ type EditableSpanPropsType = {
 
 export const EditableSpan: React.FC<EditableSpanPropsType> = ({value, onChange}) => {
 
-    const [title, setTitle] = useState<string>(value)
+    const [title, setTitle] = useState<string>('')
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>)=> setTitle(e.currentTarget.value)
 
     const [editMode, setEditMode] = useState<boolean>(false)

@@ -76,7 +76,7 @@ function App() {
         setTasks({...tasks, [newTdlId]: []})
     }
     const editTask = (tdlId: string, taskId: string, title: string) => {
-        setTasks({...tasks, [tdlId]: tasks[taskId].map(t => t.id === taskId ? {...t, task: title} : t)})
+        setTasks({...tasks, [tdlId]: tasks[tdlId].map(t => t.id === taskId ? {...t, task: title} : t)})
     }
 
     return (
