@@ -78,6 +78,9 @@ function App() {
     const editTask = (tdlId: string, taskId: string, title: string) => {
         setTasks({...tasks, [tdlId]: tasks[tdlId].map(t => t.id === taskId ? {...t, task: title} : t)})
     }
+    const editTdlTitle = (tdlId: string, title: string) => {
+        setTodolists(todolists.map(tdl => tdl.id === tdlId ? {...tdl, title} : tdl))
+    }
 
     return (
         <div className="App">
@@ -100,6 +103,7 @@ function App() {
                         tdlTitle={tdl.title}
                         removeTdl={removeTdl}
                         editTask={editTask}
+                        editTdlTitle={editTdlTitle}
                     />
                 )
             })}
