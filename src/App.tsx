@@ -24,12 +24,10 @@ function App() {
 
     const todolistsId1 = v1()
     const todolistsId2 = v1()
-
     const [todolists, setTodolists] = useState<Array<TodolistType>>([
         {id: todolistsId1, title: 'Qwerty', filter: 'all'},
         {id: todolistsId2, title: 'Asdfg', filter: 'all'},
     ])
-
     const [tasks, setTasks] = useState<StateType>({
         [todolistsId1]: [
             {id: v1(), title: '1', isDone: false},
@@ -57,23 +55,21 @@ function App() {
         setTodolists([newTdl, ...todolists])
         setTasks({...tasks, [newTdlId]:[]})
     }
-
     const removeTask = (tdlId: string, taskId: string) => {
         setTasks({...tasks, [tdlId]: tasks[tdlId].filter(t=> t.id !== taskId)})
     }
-
     const addTask = (tdlId: string, title: string) => {
         const newTask = {id: v1(), title: title, isDone: false}
         setTasks({...tasks, [tdlId]: [newTask, ...tasks[tdlId]]})
     }
-
     const switchFilter = (tdlId: string, value: FilterType) => {
         setTodolists(todolists.map(tdl => tdl.id === tdlId ? {...tdl, filter: value} : tdl))
     }
-
     const switchCheckbox = (tdlId: string, taskId: string, status: boolean) => {
         setTasks({...tasks, [tdlId]: tasks[tdlId].map(t => t.id === taskId ? {...t, isDone: status} : t)})
     }
+    const editTask = (tdlId: string, taskId: string, title: string) => setTasks({...tasks, [tdlId]: tasks[tdlId].map(t=> t.id === taskId ? {...t, title} : t)})
+    const editTdl = (tdlId: string, title: string) => setTodolists(todolists.map(tdl => tdl.id === tdlId ? {...tdl, title} : tdl))
 
     return (
         <div className="App">
@@ -94,6 +90,8 @@ function App() {
                         switchFilter={switchFilter}
                         switchCheckbox={switchCheckbox}
                         removeTdl={removeTdl}
+                        editTask={editTask}
+                        editTdl={editTdl}
                     />
                 )
             })}
