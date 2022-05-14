@@ -1,50 +1,43 @@
 import React from 'react';
-import {TdlTitleBlock} from './TdlTitleBlock';
-import {InputBlock} from './InputBlock/InputBlock';
-import {TasksList} from './TasksList/TasksList';
-import {FilterBtnBlock} from './FilterBtnBlock/FilterBtnBlock';
+import {Button} from './Button';
 import {FilterType, TaskType} from '../App';
+import {TasksList} from './TasksList';
+import {FilterBtnBlock} from './FilterBtnBlock';
+import {FullInput} from './FullInput';
+import {TdlTitleBlock} from './TdlTitleBlock';
 
 type TodolistPropsType = {
-    tasks: Array<TaskType>
-    filterSwitcher: (tdlId: string, filter: FilterType) => void
-    removeTask: (tdlId: string, id: string) => void
-    addTask: (tdlId: string, title: string) => void
-    checkboxStatusSwitcher: (tdlId: string, id: string, status: boolean) => void
-    filter: FilterType
-    tdlTitle: string
     tdlId: string
-    removeTdl: (tdlId: string) => void
-    editTask: (tdlId: string, taskId: string, title: string) => void
-    editTdlTitle: (tdlId: string, title: string) => void
+    tdlTitle: string
+    tasks: Array<TaskType>
+    removeTask: (taskId: string) => void
+    addTask: (title: string) => void
+    switchFilter: (tdlId: string, value: FilterType) => void
+    switchCheckbox: (taskId: string, status: boolean) => void
 }
 
-export const Todolist: React.FC<TodolistPropsType> = ({tasks, filterSwitcher, removeTask, addTask, checkboxStatusSwitcher, filter, tdlTitle, tdlId, removeTdl, editTask, editTdlTitle}) => {
+export const Todolist: React.FC<TodolistPropsType> = ({tdlId, tdlTitle, tasks, removeTask, addTask, switchFilter, switchCheckbox}) => {
 
-    const onAddTaskHandler = (title: string) => addTask(tdlId, title)
+    const onSwitchFilterHandler = (value: FilterType) => switchFilter(tdlId, value)
 
     return (
         <div>
             <TdlTitleBlock
-                tdlId={tdlId}
-                title={tdlTitle}
-                removeTdl={removeTdl}
-                editTdlTitle={editTdlTitle}
+                tdlTitle={tdlTitle}
             />
-            <InputBlock
-                callback={onAddTaskHandler}
+
+            <FullInput
+                addItem={addTask}
             />
+
             <TasksList
                 tasks={tasks}
                 removeTask={removeTask}
-                checkboxStatusSwitcher={checkboxStatusSwitcher}
-                tdlId={tdlId}
-                editTask={editTask}
+                switchCheckbox={switchCheckbox}
             />
+
             <FilterBtnBlock
-                filterSwitcher={filterSwitcher}
-                filter={filter}
-                tdlId={tdlId}
+                switchFilter={onSwitchFilterHandler}
             />
         </div>
     );

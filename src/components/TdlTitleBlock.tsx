@@ -1,23 +1,16 @@
 import React from 'react';
 import {Button} from './Button';
-import {EditableSpan} from './EditableSpan';
 
 type TdlTitleBlockPropsType = {
-    title: string
-    removeTdl: (tdlId: string) => void
-    tdlId: string
-    editTdlTitle: (tdlId: string, title: string) => void
+    tdlTitle: string
 }
 
-export const TdlTitleBlock: React.FC<TdlTitleBlockPropsType> = ({tdlId, title, removeTdl, editTdlTitle}) => {
-
-    const onRemoveTdlHandler = () => removeTdl(tdlId)
-    const onChangeTdlTitleHandler = (title: string) => editTdlTitle(tdlId, title)
-
+export const TdlTitleBlock: React.FC<TdlTitleBlockPropsType> = ({tdlTitle}) => {
     return (
         <h3>
-            <EditableSpan value={title} onChange={onChangeTdlTitleHandler}/>
-            <Button name={'X'} callback={onRemoveTdlHandler}/>
+            {tdlTitle}
+            <Button name={'X'} callback={() => {
+            }}/>
         </h3>
     );
 };
