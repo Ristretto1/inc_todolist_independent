@@ -13,12 +13,13 @@ type TodolistPropsType = {
     removeTask: (taskId: string) => void
     addTask: (title: string) => void
     switchFilter: (tdlId: string, value: FilterType) => void
-    switchCheckbox: (taskId: string, status: boolean) => void
+    switchCheckbox: (tdlId: string, taskId: string, status: boolean) => void
 }
 
 export const Todolist: React.FC<TodolistPropsType> = ({tdlId, tdlTitle, tasks, removeTask, addTask, switchFilter, switchCheckbox}) => {
 
     const onSwitchFilterHandler = (value: FilterType) => switchFilter(tdlId, value)
+    const onSwitchCheckboxHandler = (taskId: string, status: boolean) => switchCheckbox(tdlId, taskId, status)
 
     return (
         <div>
@@ -33,7 +34,7 @@ export const Todolist: React.FC<TodolistPropsType> = ({tdlId, tdlTitle, tasks, r
             <TasksList
                 tasks={tasks}
                 removeTask={removeTask}
-                switchCheckbox={switchCheckbox}
+                switchCheckbox={onSwitchCheckboxHandler}
             />
 
             <FilterBtnBlock

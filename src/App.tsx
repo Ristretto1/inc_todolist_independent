@@ -54,17 +54,12 @@ function App() {
         // setTasks([newTask, ...tasks])
     }
 
-    // const [filter, setFilter] = useState<FilterType>('all')
-    // let filteredTask = tasks
-    // if (filter === 'completed') filteredTask = tasks.filter(t => t.isDone)
-    // if (filter === 'active') filteredTask = tasks.filter(t => !t.isDone)
-
     const switchFilter = (tdlId: string, value: FilterType) => {
         setTodolists(todolists.map(tdl => tdl.id === tdlId ? {...tdl, filter: value} : tdl))
     }
 
-    const switchCheckbox = (taskId: string, status: boolean) => {
-        // setTasks(tasks.map(t => t.id === taskId ? {            ...t,            isDone: status        } : t))
+    const switchCheckbox = (tdlId: string, taskId: string, status: boolean) => {
+        setTasks({...tasks, [tdlId]: tasks[tdlId].map(t => t.id === taskId ? {...t, isDone: status} : t)})
     }
 
     return (
@@ -74,7 +69,7 @@ function App() {
                 if (tdl.filter === 'completed') filteredTask = tasks[tdl.id].filter(t => t.isDone)
                 if (tdl.filter === 'active') filteredTask = tasks[tdl.id].filter(t => !t.isDone)
 
-                return(
+                return (
                     <Todolist
                         key={tdl.id}
                         tdlId={tdl.id}
