@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import './App.css';
 import {Todolist} from './components/Todolist';
 import {v1} from 'uuid';
+import {FullInput} from './components/FullInput';
+import set = Reflect.set;
 
 export type TaskType = {
     id: string
@@ -45,13 +47,24 @@ function App() {
         ],
     })
 
-
-    const removeTask = (taskId: string) => {
-        // setTasks(tasks.filter(t => t.id !== taskId))
+    const removeTdl = (tdlId: string) => {
+        setTodolists(todolists.filter(tdl => tdl.id !== tdlId))
+        delete tasks[tdlId]
     }
-    const addTask = (title: string) => {
-        // const newTask = {id: v1(), title: title, isDone: false}
-        // setTasks([newTask, ...tasks])
+    const addTdl = (title: string) => {
+        const newTdlId = v1()
+        const newTdl: TodolistType = {id: newTdlId, title: title, filter: 'all'}
+        setTodolists([newTdl, ...todolists])
+        setTasks({...tasks, [newTdlId]:[]})
+    }
+
+    const removeTask = (tdlId: string, taskId: string) => {
+        setTasks({...tasks, [tdlId]: tasks[tdlId].filter(t=> t.id !== taskId)})
+    }
+
+    const addTask = (tdlId: string, title: string) => {
+        const newTask = {id: v1(), title: title, isDone: false}
+        setTasks({...tasks, [tdlId]: [newTask, ...tasks[tdlId]]})
     }
 
     const switchFilter = (tdlId: string, value: FilterType) => {
@@ -64,6 +77,7 @@ function App() {
 
     return (
         <div className="App">
+            <FullInput addItem={addTdl}/>
             {todolists.map(tdl => {
                 let filteredTask = tasks[tdl.id]
                 if (tdl.filter === 'completed') filteredTask = tasks[tdl.id].filter(t => t.isDone)
@@ -79,6 +93,7 @@ function App() {
                         addTask={addTask}
                         switchFilter={switchFilter}
                         switchCheckbox={switchCheckbox}
+                        removeTdl={removeTdl}
                     />
                 )
             })}

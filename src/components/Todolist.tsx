@@ -10,30 +10,35 @@ type TodolistPropsType = {
     tdlId: string
     tdlTitle: string
     tasks: Array<TaskType>
-    removeTask: (taskId: string) => void
-    addTask: (title: string) => void
+    removeTask: (tdlId: string, taskId: string) => void
+    addTask: (tdlId: string, title: string) => void
     switchFilter: (tdlId: string, value: FilterType) => void
     switchCheckbox: (tdlId: string, taskId: string, status: boolean) => void
+    removeTdl: (tdlId: string) => void
 }
 
-export const Todolist: React.FC<TodolistPropsType> = ({tdlId, tdlTitle, tasks, removeTask, addTask, switchFilter, switchCheckbox}) => {
+export const Todolist: React.FC<TodolistPropsType> = ({tdlId, tdlTitle, tasks, removeTask, addTask, switchFilter, switchCheckbox, removeTdl}) => {
 
     const onSwitchFilterHandler = (value: FilterType) => switchFilter(tdlId, value)
     const onSwitchCheckboxHandler = (taskId: string, status: boolean) => switchCheckbox(tdlId, taskId, status)
+    const onRemoveTaskHandler = (taskId: string) => removeTask(tdlId, taskId)
+    const onAddTaskHandler = (title: string) => addTask(tdlId, title)
+    const onRemoveTdlHandler = () => removeTdl(tdlId)
 
     return (
         <div>
             <TdlTitleBlock
                 tdlTitle={tdlTitle}
+                removeTdl={onRemoveTdlHandler}
             />
 
             <FullInput
-                addItem={addTask}
+                addItem={onAddTaskHandler}
             />
 
             <TasksList
                 tasks={tasks}
-                removeTask={removeTask}
+                removeTask={onRemoveTaskHandler}
                 switchCheckbox={onSwitchCheckboxHandler}
             />
 
