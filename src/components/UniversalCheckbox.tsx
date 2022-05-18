@@ -1,10 +1,16 @@
-import React from 'react';
+import React, {ChangeEvent, FC} from 'react';
 
-export const UniversalCheckbox = () => {
+type UniversalCheckboxPropsType = {
+    callback: (checkValue: boolean) => void
+    checked: boolean
+}
+
+export const UniversalCheckbox:FC<UniversalCheckboxPropsType> = ({callback, checked}) => {
+
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => callback(e.currentTarget.checked)
+
     return (
-        <div>
-
-        </div>
+        <input type="checkbox" onChange={onChangeHandler} checked={checked}/>
     );
 };
 
